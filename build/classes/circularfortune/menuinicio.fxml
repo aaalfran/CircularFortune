@@ -16,14 +16,30 @@
             <Image url="@../resources/casino.jpg" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" layoutX="165.0" layoutY="57.0" prefHeight="651.0" prefWidth="823.0" spacing="100.0">
+      <VBox alignment="TOP_CENTER" layoutX="227.0" layoutY="48.0" prefHeight="572.0" prefWidth="674.0" spacing="50.0">
          <children>
-            <Label fx:id="titulo" alignment="CENTER" prefHeight="190.0" prefWidth="798.0" text="Circular Fortune" textFill="#afbf20">
+            <Label fx:id="titulo" alignment="CENTER" prefHeight="141.0" prefWidth="705.0" text="Circular Fortune" textFill="#afbf20">
                <font>
                   <Font name="Bell MT Bold" size="75.0" />
                </font>
             </Label>
-            <Button fx:id="play" contentDisplay="CENTER" mnemonicParsing="false" text="Play">
+            <Button fx:id="play" contentDisplay="CENTER" mnemonicParsing="false" onAction="#click" prefHeight="88.0" prefWidth="235.0" text="Play">
+               <font>
+                  <Font name="Bell MT Bold" size="46.0" />
+               </font>
+               <effect>
+                  <SepiaTone />
+               </effect>
+            </Button>
+            <Button fx:id="settings" contentDisplay="CENTER" layoutX="220.0" layoutY="300.0" mnemonicParsing="false" onAction="#clickSettings" prefHeight="88.0" prefWidth="235.0" text="Settings">
+               <font>
+                  <Font name="Bell MT Bold" size="46.0" />
+               </font>
+               <effect>
+                  <SepiaTone />
+               </effect>
+            </Button>
+            <Button fx:id="exit" contentDisplay="CENTER" layoutX="220.0" layoutY="354.0" mnemonicParsing="false" onAction="#clickExit" prefHeight="88.0" prefWidth="235.0" text="Exit">
                <font>
                   <Font name="Bell MT Bold" size="46.0" />
                </font>
