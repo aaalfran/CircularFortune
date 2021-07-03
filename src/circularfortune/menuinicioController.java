@@ -29,6 +29,8 @@ public class menuinicioController {
     @FXML
     private Button exit;
 
+    
+    
     @FXML
     void click(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ventanaJuego.fxml"));
@@ -36,7 +38,7 @@ public class menuinicioController {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-
+ 
     }
     @FXML
     void clickExit(ActionEvent event) {
@@ -52,4 +54,6 @@ public class menuinicioController {
         stage.setScene(scene);
         stage.show();
     }
+    
+   
 }
