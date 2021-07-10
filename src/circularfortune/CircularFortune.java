@@ -5,6 +5,7 @@
  */
 package circularfortune;
 
+import java.applet.AudioClip;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +18,8 @@ import javafx.stage.Stage;
  * @author aaron
  */
 public class CircularFortune extends Application {
-    
+
+ 
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("menuinicio.fxml"));
@@ -27,6 +29,7 @@ public class CircularFortune extends Application {
         stage.setTitle("Circular Fortune");
         stage.setScene(scene);
         stage.show();
+
     }
 
     /**
@@ -35,5 +38,5 @@ public class CircularFortune extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
