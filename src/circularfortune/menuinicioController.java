@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 public class menuinicioController {
@@ -22,6 +23,9 @@ public class menuinicioController {
 
     @FXML
     private Button play;
+    
+    @FXML
+    private Button reglas;
 
     @FXML
     private Button settings;
@@ -33,27 +37,31 @@ public class menuinicioController {
     
     @FXML
     void click(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ventanaJuego.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
- 
-    }
-    @FXML
-    void clickExit(ActionEvent event) {
-            Stage st = (Stage) exit.getScene().getWindow();
-            st.close();
-    }
-
-    @FXML
-    void clickSettings(ActionEvent event) throws IOException {
+        playSound();
         Parent root = FXMLLoader.load(getClass().getResource("Settings.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    void clickReglas(ActionEvent event) throws IOException {
+        playSound();
+        Parent root = FXMLLoader.load(getClass().getResource("reglas.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
     
-   
+    @FXML
+    void clickExit(ActionEvent event) {
+            Stage st = (Stage) exit.getScene().getWindow();
+            st.close();
+    }
+    
+    private void playSound(){
+        AudioClip note = new AudioClip(this.getClass().getResource("/resources/clickBoton.wav").toString());
+        note.play();
+    }
 }

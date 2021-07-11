@@ -31,7 +31,7 @@
                   <SepiaTone />
                </effect>
             </Button>
-            <Button fx:id="settings" contentDisplay="CENTER" layoutX="220.0" layoutY="300.0" mnemonicParsing="false" onAction="#clickSettings" prefHeight="88.0" prefWidth="235.0" text="Settings">
+            <Button fx:id="reglas" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickReglas" prefHeight="88.0" prefWidth="235.0" text="Rules">
                <font>
                   <Font name="Bell MT Bold" size="46.0" />
                </font>
