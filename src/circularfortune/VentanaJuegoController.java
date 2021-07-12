@@ -1,5 +1,7 @@
 package circularfortune;
 
+import Elements.vistaJuego;
+import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -17,6 +19,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -59,8 +63,24 @@ public class VentanaJuegoController implements Initializable{
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Se fija la apuesta inicial
         String apuestaIni = String.valueOf(SettingsController.apuestaIni);
         apuesta.setText(apuestaIni);
+        
+        //Se agregan los circulos de base
+       anchor.getChildren().add(vistaJuego.getCirculoExt());
+       anchor.getChildren().add(vistaJuego.getCirculoInt());
+        
+       vistaJuego.fijarCirculos(anchor);
+       
+       Label l = new Label();
+       l.setText("texto");
+       l.setShape(new Circle(100000000));
+       l.setStyle("-fx-background-color: blue;");
+       anchor.getChildren().add(l);
+       
+     
+
     }
     @FXML
     void clickExitbtn(ActionEvent event) throws IOException {

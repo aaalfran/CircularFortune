@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 public class SettingsController implements Initializable {
     
-    int cantidadCirculos;
+    public static int cantidadCirculos = 1;
     public static int apuestaIni =0;
 
     @FXML
