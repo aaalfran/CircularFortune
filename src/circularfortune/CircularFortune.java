@@ -5,12 +5,14 @@
  */
 package circularfortune;
 
-import java.applet.AudioClip;
+import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -19,9 +21,14 @@ import javafx.stage.Stage;
  */
 public class CircularFortune extends Application {
 
- 
+    static String musicPathI = "Audio.mp3";
+    static String musicPath = "AudioJuego.mp3";
+    static MediaPlayer musicaInicio = Music(musicPathI);
+    static MediaPlayer musicaJuego = Music(musicPath);
+
     @Override
     public void start(Stage stage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("menuinicio.fxml"));
         stage.getIcons().add(new Image("/resources/chip.png"));
         stage.setResizable(false);
@@ -29,7 +36,8 @@ public class CircularFortune extends Application {
         stage.setTitle("Circular Fortune");
         stage.setScene(scene);
         stage.show();
-
+        musicaInicio.play();
+        musicaJuego.stop();
     }
 
     /**
@@ -37,6 +45,16 @@ public class CircularFortune extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
+    }
+    //Codigo para la musica
+
+    public static MediaPlayer Music(String nombre) {
+        File archivo = new File(nombre);
+        Media audio = new Media(archivo.toURI().toString());
+        MediaPlayer reproductor = new MediaPlayer(audio);
+        return reproductor;
+
     }
 
 }

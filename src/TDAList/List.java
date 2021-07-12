@@ -18,7 +18,8 @@ public interface List<E> {
     public void addFirst(E element); //inserta elemento al inicio de la lista
     
     public E remove(int index); // remueve y retorna el elemento en la posición index
-
+    public E get(int index);
+     public E set(int index, E element);
     
     
 }

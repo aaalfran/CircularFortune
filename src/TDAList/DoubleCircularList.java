@@ -21,27 +21,27 @@ public class DoubleCircularList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-        if (isEmpty()) {
-            addLast(element);
-        } else if (index == 0) {
+        if (index == 0) {
             addFirst(element);
-        } else if (index == (size() - 1)) {
+        } else if (index == (size())) {
             addLast(element);
         } else {
             boolean vuelta = false;
             int cont = -1;
+
+            Node<E> nuevo = new Node<>(element);
             for (Node<E> p = last.getNext(); vuelta != true; p = p.getNext()) {
                 cont++;
                 if ((index - 1) == cont) {
                     //LOGICA PARA Agregar
-                    Node<E> nuevoSiguiente = new Node<>(element);
-                    Node<E> continuar = p.getNext();
-                    p.setNext(nuevoSiguiente);
-                    nuevoSiguiente.setNext(continuar);
-                    continuar.setPrevius(p);
+                    nuevo.setNext(p.getNext());
+                    p.getNext().setPrevius(nuevo);
+                    nuevo.setPrevius(p);
+                    p.setNext(nuevo);
                     break;
                 }
             }
+
         }
 
     }
@@ -141,6 +141,37 @@ public class DoubleCircularList<E> implements List<E> {
     public boolean isEmpty() {
         return last == null;
 
+    }
+
+    @Override
+    public E get(int index) {
+        if (index < size()) {
+            Node<E> n;
+            int v = 0;
+            for (n = first; n != null; n = n.getNext()) {
+                if (v == index) {
+                    return (n.getContent());
+                }
+                v++;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public E set(int index, E element) {
+        if (index < size()) {
+            Node<E> n;
+            int v = 0;
+            for (n = first; n != null; n = n.getNext()) {
+                if (v == index) {
+                    n.setContent(element);
+                    return (n.getContent());
+                }
+                v++;
+            }
+        }
+        return null;
     }
 
 }

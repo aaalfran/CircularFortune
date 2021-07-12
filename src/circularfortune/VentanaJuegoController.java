@@ -1,7 +1,10 @@
 package circularfortune;
 
 import Elements.vistaJuego;
+import static circularfortune.CircularFortune.musicaInicio;
+import static circularfortune.CircularFortune.musicaJuego;
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -19,7 +22,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -50,6 +52,7 @@ public class VentanaJuegoController implements Initializable{
     @FXML
     void clickDer(ActionEvent event) {
         playSound("derecha");
+       
     }
 
     @FXML
@@ -63,6 +66,8 @@ public class VentanaJuegoController implements Initializable{
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        musicaInicio.stop();
+        musicaJuego.play();
         //Se fija la apuesta inicial
         String apuestaIni = String.valueOf(SettingsController.apuestaIni);
         apuesta.setText(apuestaIni);
@@ -83,7 +88,9 @@ public class VentanaJuegoController implements Initializable{
 
     }
     @FXML
-    void clickExitbtn(ActionEvent event) throws IOException {
+    void clickExitbtn(ActionEvent event) throws IOException{
+        musicaInicio.play();
+        musicaJuego.stop();
         playSound("click");
         Stage st = (Stage) anchor.getScene().getWindow();
         Alert.AlertType tipoAlerta = Alert.AlertType.CONFIRMATION;
@@ -135,6 +142,6 @@ public class VentanaJuegoController implements Initializable{
                 break;
         }
     }
-
+   
 }
 
