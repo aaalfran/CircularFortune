@@ -1,65 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DisplacementMap?>
+<?import javafx.scene.effect.FloatMap?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="695.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circularfortune.VentanaJuegoController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="695.0" prefWidth="1038.0" style="-fx-background-color: #44322E;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circularfortune.VentanaJuegoController">
    <children>
       <ImageView fitHeight="793.0" fitWidth="1038.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/casinoInterior.jpg" />
          </image>
       </ImageView>
-      <HBox alignment="CENTER" layoutY="621.0" prefHeight="100.0" prefWidth="1038.0" spacing="20.0" style="-fx-background-color: #44322E;" AnchorPane.leftAnchor="0.0">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P1" />
-            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P2" />
-            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P3" />
-            <Region prefHeight="100.0" prefWidth="59.0" />
-            <Button fx:id="rotIzq" mnemonicParsing="false" onAction="#clickIzq" prefHeight="48.0" prefWidth="55.0" text="Izq" />
-            <Button fx:id="eliminar" mnemonicParsing="false" onAction="#clickElim" prefHeight="48.0" prefWidth="55.0" text="Elim" />
-            <Button fx:id="rotDer" mnemonicParsing="false" onAction="#clickDer" prefHeight="48.0" prefWidth="55.0" text="Der" />
-            <Region layoutX="534.0" layoutY="10.0" prefHeight="100.0" prefWidth="110.0" />
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Su apuesta:">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <Label fx:id="apuesta" alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="113.0" textAlignment="RIGHT" textFill="#fffffff7">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="CENTER">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <Label fx:id="score" alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="113.0" text="0" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
       <ImageView fitHeight="60.0" fitWidth="59.0" layoutX="964.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/exit.png" />
@@ -72,5 +32,73 @@
       </Button>
       <Circle fill="#b9d5f000" layoutX="526.0" layoutY="311.0" radius="258.0" stroke="#b5b5b5" strokeType="INSIDE" strokeWidth="8.0" />
       <Circle fill="#b9d5f000" layoutX="526.0" layoutY="311.0" radius="145.0" stroke="#b5b5b5" strokeType="INSIDE" strokeWidth="8.0" />
+      <ImageView fitHeight="67.0" fitWidth="72.0" layoutX="371.0" layoutY="622.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/izq.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="494.0" layoutY="623.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/elim.png" />
+         </image>
+         <effect>
+            <DisplacementMap wrap="true">
+               <mapData>
+                  <FloatMap />
+               </mapData>
+            </DisplacementMap>
+         </effect>
+      </ImageView>
+      <Button fx:id="rotIzq" layoutX="371.0" layoutY="626.0" mnemonicParsing="false" onAction="#clickIzq" prefHeight="60.0" prefWidth="67.0" style="-fx-background-radius: 100;">
+         <effect>
+            <Shadow color="#fafafa00" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="eliminar" layoutX="493.0" layoutY="626.0" mnemonicParsing="false" onAction="#clickElim" prefHeight="60.0" prefWidth="67.0" style="-fx-background-radius: 100;" text="Elim">
+         <effect>
+            <Shadow color="TRANSPARENT" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ImageView fitHeight="67.0" fitWidth="72.0" layoutX="613.0" layoutY="623.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/der.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="rotDer" layoutX="613.0" layoutY="626.0" mnemonicParsing="false" onAction="#clickDer" prefHeight="60.0" prefWidth="67.0" style="-fx-background-radius: 100;" text="Der">
+         <effect>
+            <Shadow color="TRANSPARENT" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Text layoutX="772.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Su apuesta:">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Label fx:id="apuesta" alignment="CENTER" contentDisplay="CENTER" layoutX="769.0" layoutY="635.0" prefHeight="60.0" prefWidth="113.0" textAlignment="RIGHT" textFill="#fffffff7">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Text layoutX="929.0" layoutY="643.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="CENTER">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Label fx:id="score" alignment="CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="635.0" prefHeight="60.0" prefWidth="113.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="216.0" layoutY="635.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P3" />
+      <Button layoutX="120.0" layoutY="635.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P2" />
+      <Button layoutX="26.0" layoutY="635.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P1" />
    </children>
 </AnchorPane>

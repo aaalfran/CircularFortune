@@ -45,17 +45,17 @@ public class VentanaJuegoController implements Initializable{
 
     @FXML
     void clickDer(ActionEvent event) {
-
+        playSound("derecha");
     }
 
     @FXML
     void clickElim(ActionEvent event) {
-
+        playSound("eliminar");
     }
 
     @FXML
     void clickIzq(ActionEvent event) {
-
+        playSound("izquierda");
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -86,9 +86,33 @@ public class VentanaJuegoController implements Initializable{
             }
     }
     public void playSound(String s){
-        if(s.equals("click")){
-            AudioClip note = new AudioClip(this.getClass().getResource("/resources/clickBoton.wav").toString());
-            note.play();
+        switch (s) {
+            case "click":
+                {
+                    AudioClip note = new AudioClip(this.getClass().getResource("/resources/clickBoton.wav").toString());
+                    note.play();
+                    break;
+                }
+            case "derecha":
+                {
+                    AudioClip note = new AudioClip(this.getClass().getResource("/resources/der.wav").toString());
+                    note.play();
+                    break;
+                }
+            case "izquierda":
+                {
+                    AudioClip note = new AudioClip(this.getClass().getResource("/resources/izq.wav").toString());
+                    note.play();
+                    break;
+                }
+            case "eliminar":
+                {
+                    AudioClip note = new AudioClip(this.getClass().getResource("/resources/elim.wav").toString());
+                    note.play();
+                    break;
+                }
+            default:
+                break;
         }
     }
 
