@@ -5,11 +5,13 @@
  */
 package TDAList;
 
+import java.util.Iterator;
+
 /**
  *
  * @author fabri
  */
-public class DoubleCircularList<E> implements List<E> {
+public class DoubleCircularList<E> {
 
     public Node<E> first;
     public Node<E> last;
@@ -19,7 +21,6 @@ public class DoubleCircularList<E> implements List<E> {
         last = null;
     }
 
-    @Override
     public void add(int index, E element) {
         if (index == 0) {
             addFirst(element);
@@ -62,7 +63,6 @@ public class DoubleCircularList<E> implements List<E> {
         return temp;
     }
 
-    @Override
     public E remove(int index) {
         if (isEmpty()) {
             return null;
@@ -108,7 +108,6 @@ public class DoubleCircularList<E> implements List<E> {
 
     }
 
-    @Override
     public void addLast(E element) {
         Node n = new Node<>(element);
         if (isEmpty()) {
@@ -143,7 +142,6 @@ public class DoubleCircularList<E> implements List<E> {
 
     }
 
-    @Override
     public E get(int index) {
         if (index < size()) {
             Node<E> n;
@@ -158,7 +156,6 @@ public class DoubleCircularList<E> implements List<E> {
         return null;
     }
 
-    @Override
     public E set(int index, E element) {
         if (index < size()) {
             Node<E> n;
@@ -172,6 +169,46 @@ public class DoubleCircularList<E> implements List<E> {
             }
         }
         return null;
+    }
+
+    public Iterator<E> iterator() {
+        Iterator<E> it = new Iterator<E>() {
+            private Node<E> p = last;
+            boolean vuelta=false;
+
+    
+            @Override
+            public boolean hasNext() {   
+              if(!vuelta){
+                  return true;
+              }else{
+                  return false;
+              }
+            }
+
+            @Override
+            public E next() {
+                E tmp = p.getContent();
+                p = p.getNext();
+                if(p==last){
+                    vuelta=true;
+                }
+                return tmp;
+            }
+        };
+
+        return it;
+    }
+
+    public static Integer suma(DoubleCircularList<Integer> listaCircular) {
+        int sumador = 0;
+        Iterator<Integer> iteratorA = listaCircular.iterator();
+        while (iteratorA.hasNext()) {
+            int valor = iteratorA.next();
+            sumador += valor;
+        }
+
+        return sumador;
     }
 
 }
