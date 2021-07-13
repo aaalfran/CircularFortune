@@ -216,7 +216,7 @@ public class DoubleCircularList<E> implements List<E> {
         return lista1+lista2;
     }
 
-    // mueve los elementos a la derecha
+    // mueve los elementos a la derecha y les suma 1
     public static void moveRigth(DoubleCircularList<Integer> c) {
         DoubleCircularList<Integer> tmp = new DoubleCircularList<>();
         for (int i = 0; i < c.size() - 1; i++) {
@@ -230,6 +230,17 @@ public class DoubleCircularList<E> implements List<E> {
             c.set(i, tmp.get(i));
 
         }
+
+    }
+      // mueve los elementos a la izquierda y les resta 1
+       public static void moveLeft(DoubleCircularList<Integer> c) {
+        for (int i = c.size() - 1; i >= 0; i--) {
+            int e = c.get(i) - 1;
+            c.set(i, e);
+
+        }
+        int e = c.removeFirst();
+        c.addLast(e);
 
     }
 
