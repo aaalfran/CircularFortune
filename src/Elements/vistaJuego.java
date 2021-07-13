@@ -24,6 +24,9 @@ import javafx.scene.text.FontWeight;
 public class vistaJuego {
 
     public static ArrayList<DoubleCircularList<Integer>> CicularLists;
+    public static DoubleCircularList<Integer> cirInterno;
+    public static DoubleCircularList<Integer> cirExterno;
+
 
     public static Circle getCirculoExt() {
 
@@ -48,15 +51,10 @@ public class vistaJuego {
     }
 
     public static void fijarCirculos(AnchorPane anchor) {
+        CicularLists = new ArrayList<>();
+        cirExterno = new DoubleCircularList<>();
+        cirInterno = new DoubleCircularList<>();
         Random rd = new Random();
-        DoubleCircularList<Integer> cirInterno = new DoubleCircularList();
-        DoubleCircularList<Integer> cirExterno = new DoubleCircularList();
-
-        DoubleCircularList<Integer> prueba=new DoubleCircularList<>();
-        prueba.addLast(10);
-        prueba.addLast(20);
-        prueba.addLast(30);
-
 
         int numCirculos = SettingsController.cantidadCirculos;
         double centerX = 519;
@@ -83,7 +81,9 @@ public class vistaJuego {
             anchor.getChildren().addAll(n, l);    
 
         }
-
+        
+       
+        
         //Elementos del circulo Externo
         //Circulos Externos
         int radioMayor = 275;
@@ -94,9 +94,11 @@ public class vistaJuego {
             double x = centerX + xOffset;
             double y = centerY + yOffset;
 
-            //Etiquetas del Circulo Externo
+            //Se generan valores aleatorios a las etiquetas
             Integer num = rd.nextInt(9);
-            cirInterno.addLast(num);
+            cirExterno.addLast(num);
+            
+            //Etiquetas del Circulo Externo
             Node n = new Node(x, y, 40);
             Label l = new Label(num.toString());
             l.setLayoutX(x - 10);
@@ -105,8 +107,13 @@ public class vistaJuego {
             anchor.getChildren().addAll(n, l);
 
         }
-        CicularLists.addLast(cirExterno);
-        CicularLists.addLast(cirInterno);
+        
+        
+        
+        
+        
+         CicularLists.addLast(cirExterno);
+         CicularLists.addLast(cirInterno);
         
         
     }

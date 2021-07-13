@@ -1,6 +1,9 @@
 package circularfortune;
 
 import Elements.vistaJuego;
+import static Elements.vistaJuego.cirExterno;
+import static Elements.vistaJuego.cirInterno;
+import TDAList.DoubleCircularList;
 import static circularfortune.CircularFortune.musicaInicio;
 import static circularfortune.CircularFortune.musicaJuego;
 import java.awt.Color;
@@ -52,7 +55,7 @@ public class VentanaJuegoController implements Initializable{
     @FXML
     void clickDer(ActionEvent event) {
         playSound("derecha");
-       
+        
     }
 
     @FXML
@@ -72,14 +75,16 @@ public class VentanaJuegoController implements Initializable{
         String apuestaIni = String.valueOf(SettingsController.apuestaIni);
         apuesta.setText(apuestaIni);
         
+     
         //Se agregan los circulos de base
        anchor.getChildren().add(vistaJuego.getCirculoExt());
        anchor.getChildren().add(vistaJuego.getCirculoInt());
         
+       //Se establece el valor del score inicial
        vistaJuego.fijarCirculos(anchor);
-       
-       
-     
+       Integer tot = DoubleCircularList.suma(cirExterno) + DoubleCircularList.suma(cirInterno);
+        score.setText(tot.toString());
+        System.out.println(cirExterno.size());
 
     }
     @FXML

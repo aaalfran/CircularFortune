@@ -11,7 +11,7 @@ import java.util.Iterator;
  *
  * @author fabri
  */
-public class DoubleCircularList<E> {
+public class DoubleCircularList<E> implements Iterable<E>{
 
     public Node<E> first;
     public Node<E> last;
