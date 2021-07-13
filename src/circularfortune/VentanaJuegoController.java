@@ -59,7 +59,7 @@ public class VentanaJuegoController implements Initializable{
         
         DoubleCircularList.moveRigth(cirExterno);
         DoubleCircularList.moveRigth(cirInterno);
-        vistaJuego.rotarDerecha();
+        vistaJuego.actualizarValoresCirculos();
 
     }
 
@@ -71,6 +71,9 @@ public class VentanaJuegoController implements Initializable{
     @FXML
     void clickIzq(ActionEvent event) {
         playSound("izquierda");
+        DoubleCircularList.moveLeft(cirExterno);
+        DoubleCircularList.moveLeft(cirInterno);
+        vistaJuego.actualizarValoresCirculos();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

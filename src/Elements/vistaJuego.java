@@ -117,7 +117,7 @@ public class vistaJuego {
         
     }
     
-    public static void rotarDerecha(){
+    public static void actualizarValoresCirculos(){
         int contadorExt =0;
         int contadorInt =0;
         for(Label l : labelsExt){
