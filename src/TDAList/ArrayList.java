@@ -5,6 +5,8 @@
  */
 package TDAList;
 
+import java.util.Iterator;
+
 /**
  *
  * @author fabri
@@ -164,6 +166,29 @@ public class ArrayList<E> implements List<E> {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        Iterator<E> it = new Iterator<E>(){
+            
+            private int index = 0;
+            
+            @Override
+            public boolean hasNext() {
+                return index < effectiveSize;
+            }
+
+            @Override
+            public E next() {
+                E tmp = get(index);
+                index++;
+                return tmp;
+            }
+            
+        };
+        
+        return it;
     }
 
 }

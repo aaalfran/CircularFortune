@@ -26,6 +26,10 @@ public class vistaJuego {
     public static ArrayList<DoubleCircularList<Integer>> CicularLists;
     public static DoubleCircularList<Integer> cirInterno;
     public static DoubleCircularList<Integer> cirExterno;
+    
+    //Arreglos con las labels para actualizar
+    public static ArrayList<Label> labelsExt = new ArrayList<>();;
+    public static ArrayList<Label> labelsInt = new ArrayList<>();;
 
 
     public static Circle getCirculoExt() {
@@ -78,6 +82,7 @@ public class vistaJuego {
             l.setLayoutX(x - 10);
             l.setLayoutY(y - 10);
             l.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            labelsInt.addLast(l);
             anchor.getChildren().addAll(n, l);    
 
         }
@@ -104,6 +109,7 @@ public class vistaJuego {
             l.setLayoutX(x - 10);
             l.setLayoutY(y - 10);
             l.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            labelsExt.addLast(l);
             anchor.getChildren().addAll(n, l);
 
         }
@@ -116,6 +122,23 @@ public class vistaJuego {
          CicularLists.addLast(cirInterno);
         
         
+    }
+    
+    public static void rotarDerecha(){
+        int contadorExt =0;
+        int contadorInt =0;
+        for(Label l : labelsExt){
+            
+            l.setText(cirExterno.get(contadorExt).toString());
+            contadorExt ++;
+        }
+        
+        for(Label l : labelsInt){
+            
+            l.setText(cirInterno.get(contadorInt).toString());
+            contadorInt ++;
+        }
+       
     }
 
 }

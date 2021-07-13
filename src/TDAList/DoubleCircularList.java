@@ -210,5 +210,8 @@ public class DoubleCircularList<E> implements Iterable<E>{
 
         return sumador;
     }
+    
+    // AQUI VA EL METODO MOVE RIGHT DE PEDRO
+
 
 }

@@ -9,7 +9,7 @@ package TDAList;
  *
  * @author fabri
  */
-public interface List<E> {
+public interface List<E> extends Iterable<E>{
     
     public void add(int index, E element); // inserta element en la posición index
     
