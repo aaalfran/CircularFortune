@@ -87,9 +87,9 @@ public class VentanaJuegoController implements Initializable{
         
        //Se establece el valor del score inicial
        vistaJuego.fijarCirculos(anchor);
-       Integer tot = DoubleCircularList.suma(cirExterno) + DoubleCircularList.suma(cirInterno);
-        score.setText(tot.toString());
-        System.out.println(cirExterno.size());
+       Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno,vistaJuego.cirInterno);
+       score.setText(tot.toString());
+       System.out.println(cirExterno.size());
 
     }
     @FXML

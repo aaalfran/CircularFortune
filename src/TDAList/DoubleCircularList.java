@@ -11,7 +11,7 @@ import java.util.Iterator;
  *
  * @author fabri
  */
-public class DoubleCircularList<E> implements Iterable<E>{
+public class DoubleCircularList<E> implements List<E> {
 
     public Node<E> first;
     public Node<E> last;
@@ -174,24 +174,23 @@ public class DoubleCircularList<E> implements Iterable<E>{
     public Iterator<E> iterator() {
         Iterator<E> it = new Iterator<E>() {
             private Node<E> p = last;
-            boolean vuelta=false;
+            boolean vuelta = false;
 
-    
             @Override
-            public boolean hasNext() {   
-              if(!vuelta){
-                  return true;
-              }else{
-                  return false;
-              }
+            public boolean hasNext() {
+                if (!vuelta) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             @Override
             public E next() {
                 E tmp = p.getContent();
                 p = p.getNext();
-                if(p==last){
-                    vuelta=true;
+                if (p == last) {
+                    vuelta = true;
                 }
                 return tmp;
             }
@@ -200,19 +199,25 @@ public class DoubleCircularList<E> implements Iterable<E>{
         return it;
     }
 
-    public static Integer suma(DoubleCircularList<Integer> listaCircular) {
-        int sumador = 0;
-        Iterator<Integer> iteratorA = listaCircular.iterator();
+    public static Integer suma(DoubleCircularList<Integer> listaCircular1, DoubleCircularList<Integer> listaCircular2) {
+        int lista1 = 0;
+        int lista2 = 0;
+        Iterator<Integer> iteratorA = listaCircular1.iterator();
+        Iterator<Integer> iteratorB = listaCircular2.iterator();
+
         while (iteratorA.hasNext()) {
             int valor = iteratorA.next();
-            sumador += valor;
+            lista1 += valor;
         }
-
-        return sumador;
+        while (iteratorB.hasNext()) {
+            int valor = iteratorB.next();
+            lista2 += valor;
+        }
+        return lista1+lista2;
     }
-    
+
     // mueve los elementos a la derecha
-        public static void moveRigth(DoubleCircularList<Integer> c) {
+    public static void moveRigth(DoubleCircularList<Integer> c) {
         DoubleCircularList<Integer> tmp = new DoubleCircularList<>();
         for (int i = 0; i < c.size() - 1; i++) {
             int e = c.get(i) + 1;
@@ -227,6 +232,5 @@ public class DoubleCircularList<E> implements Iterable<E>{
         }
 
     }
-
 
 }

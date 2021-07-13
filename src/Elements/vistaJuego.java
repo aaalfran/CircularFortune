@@ -55,7 +55,6 @@ public class vistaJuego {
     }
 
     public static void fijarCirculos(AnchorPane anchor) {
-        CicularLists = new ArrayList<>();
         cirExterno = new DoubleCircularList<>();
         cirInterno = new DoubleCircularList<>();
         Random rd = new Random();
@@ -113,13 +112,7 @@ public class vistaJuego {
             anchor.getChildren().addAll(n, l);
 
         }
-        
-        
-        
-        
-        
-         CicularLists.addLast(cirExterno);
-         CicularLists.addLast(cirInterno);
+    
         
         
     }
