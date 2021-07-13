@@ -5,21 +5,28 @@
  */
 package TDAList;
 
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+
 /**
  *
  * @author fabri
  */
-public class Node<E> {
+public class Node<E> extends Circle{
     
     private E content;
     private Node<E> next;
     private Node<E> previus;
 
+    public Node(double x, double y, int rad){
+        super(x, y, rad);
+        super.setFill(Paint.valueOf("#FFFFFF"));
+    }
+    
     public Node(E content){
         this.content = content;
         this.next = this;
         this.previus=this;
-         
     }
 
     public E getContent() {

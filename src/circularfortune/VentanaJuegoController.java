@@ -78,11 +78,6 @@ public class VentanaJuegoController implements Initializable{
         
        vistaJuego.fijarCirculos(anchor);
        
-       Label l = new Label();
-       l.setText("texto");
-       l.setShape(new Circle(100000000));
-       l.setStyle("-fx-background-color: blue;");
-       anchor.getChildren().add(l);
        
      
 

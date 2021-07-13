@@ -8,11 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="CircularFortune.jar" size="1457828" download="eager" />
+    <jar href="CircularFortune.jar" size="1458675" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="CircularFortune" >
-    <param name="requiredFXVersion" value="8.0+"/>
-  </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="circularfortune.CircularFortune"  name="CircularFortune" />
   <update check="always"/>
 </jnlp>

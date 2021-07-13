@@ -6,10 +6,14 @@
 package Elements;
 
 import TDAList.DoubleCircularList;
+import TDAList.Node;
 import circularfortune.SettingsController;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  *
@@ -46,21 +50,39 @@ public class vistaJuego {
         DoubleCircularList cirExterno = new DoubleCircularList();
         
         
-        
         int numCirculos = SettingsController.cantidadCirculos;
-        int radioMenor = 125;
         double centerX = 519;
         double centerY = 310;
+        
+        
+        //Elementos del Circulo Interno
+        
+        int radioMenor = 125;
+        
         for (int i = 0; i < numCirculos; i++) {
             double angle = 2 * i * Math.PI / numCirculos;
             double xOffset = radioMenor * Math.cos(angle);
             double yOffset = radioMenor * Math.sin(angle);
             double x = centerX + xOffset;
             double y = centerY + yOffset;
-            Circle cIn = new Circle(x, y, 25,Paint.valueOf("#FFFFFF"));
-            anchor.getChildren().add(cIn);
-            cirInterno.addLast(cIn);
+            
+            //Etiquetas del circulo Interno
+            
+            Integer num = 1;
+            Node n = new Node(x, y, 30);
+            Label l = new Label(num.toString());
+            l.setLayoutX(x-10);
+            l.setLayoutY(y-10);
+            l.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            anchor.getChildren().addAll(n,l);
+            
+
         }
+        
+        //Elementos del circulo Externo
+        
+        //Circulos Externos
+        
         int radioMayor = 275;
         for (int i = 0; i < numCirculos; i++) {
             double angle = 2 * i * Math.PI / numCirculos;
@@ -68,13 +90,23 @@ public class vistaJuego {
             double yOffset = radioMayor * Math.sin(angle);
             double x = centerX + xOffset;
             double y = centerY + yOffset;
-            Circle cExt = new Circle(x, y, 25,Paint.valueOf("#FFFFFF"));
-            anchor.getChildren().add(cExt);
-            cirExterno.addLast(cExt);
+            
+            //Etiquetas del Circulo Externo
+            
+            Integer num = 1;
+            Node n = new Node(x, y, 40);
+            Label l = new Label(num.toString());
+            l.setLayoutX(x-10);
+            l.setLayoutY(y-10);
+            l.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            anchor.getChildren().addAll(n,l);
+
+
         }
         
         
     }
+    
     
     
     
