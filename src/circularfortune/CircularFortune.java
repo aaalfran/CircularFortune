@@ -21,11 +21,15 @@ import javafx.stage.Stage;
  */
 public class CircularFortune extends Application {
 
+    
+    
+    
+    
     static String musicPathI = "Audio.mp3";
     static String musicPath = "AudioJuego.mp3";
     static MediaPlayer musicaInicio = Music(musicPathI);
     static MediaPlayer musicaJuego = Music(musicPath);
-
+    
     @Override
     public void start(Stage stage) throws Exception {
 

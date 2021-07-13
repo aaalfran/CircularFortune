@@ -211,7 +211,22 @@ public class DoubleCircularList<E> implements Iterable<E>{
         return sumador;
     }
     
-    // AQUI VA EL METODO MOVE RIGHT DE PEDRO
+    // mueve los elementos a la derecha
+        public static void moveRigth(DoubleCircularList<Integer> c) {
+        DoubleCircularList<Integer> tmp = new DoubleCircularList<>();
+        for (int i = 0; i < c.size() - 1; i++) {
+            int e = c.get(i) + 1;
+            tmp.add(i, e);
+
+        }
+        tmp.add(0, c.get(c.size() - 1) + 1);
+
+        for (int i = 0; i < c.size(); i++) {
+            c.set(i, tmp.get(i));
+
+        }
+
+    }
 
 
 }
