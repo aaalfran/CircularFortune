@@ -56,12 +56,11 @@ public class VentanaJuegoController implements Initializable{
     void clickDer(ActionEvent event) {
         playSound("derecha");
         
-        //Descomentar cuando se implemente el metodo moveRIGHT
-        /*
+        
         DoubleCircularList.moveRigth(cirExterno);
         DoubleCircularList.moveRigth(cirInterno);
         vistaJuego.rotarDerecha();
-*/
+
     }
 
     @FXML
