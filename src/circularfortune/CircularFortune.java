@@ -25,10 +25,9 @@ public class CircularFortune extends Application {
     
     
     
-    static String musicPathI = "Audio.mp3";
-    static String musicPath = "AudioJuego.mp3";
-    static MediaPlayer musicaInicio = Music(musicPathI);
-    static MediaPlayer musicaJuego = Music(musicPath);
+  
+    static MediaPlayer musicaInicio = Music("src\\resources\\Audio.mp3");
+    static MediaPlayer musicaJuego = Music("src\\resources\\AudioJuego.mp3");
     
     @Override
     public void start(Stage stage) throws Exception {
