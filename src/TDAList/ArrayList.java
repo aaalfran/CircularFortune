@@ -191,4 +191,9 @@ public class ArrayList<E> implements List<E> {
         return it;
     }
 
+    @Override
+    public int getE(E element) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

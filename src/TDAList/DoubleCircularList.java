@@ -256,5 +256,34 @@ public class DoubleCircularList<E> implements List<E> {
         c.addLast(e);
 
     }
+        @Override
+        
+    public int getE(E element) {
+        boolean vuelta = false;
+        int cont = 0;
+        for (Node<E> p = last.getNext(); vuelta != true; p = p.getNext()) {
+          
+            if (p.getContent() == element) {
+                vuelta = true;
+                return cont;
+            }
+            cont++;
+           
+        }
+      
+        return -1;
+    }
+    
+    
+       public String toString() {
+        String acumulador = "";
+        Node<E> p = first;
+        for (int n = 0; n < size(); n++) {
+            acumulador += (p.getContent() + " ");
+            p = p.getNext();
+        }
+
+        return acumulador;
+    }
 
 }
