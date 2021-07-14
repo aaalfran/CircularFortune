@@ -196,6 +196,7 @@ public class VentanaJuegoController implements Initializable{
                 Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
+                vistaJuego.limpiarBuffer();
             }else{
                 playSound("click");
                 
@@ -228,6 +229,8 @@ public class VentanaJuegoController implements Initializable{
             Scene scene = new Scene(root);
             st.setScene(scene);
             st.show();
+            
+            vistaJuego.limpiarBuffer();
         }
         
     }

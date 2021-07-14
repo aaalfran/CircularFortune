@@ -24,7 +24,6 @@ import javafx.scene.text.FontWeight;
 public class vistaJuego {
 
     
-    public static ArrayList<DoubleCircularList<Integer>> CicularLists;
     public static DoubleCircularList<Integer> cirInterno;
     public static DoubleCircularList<Integer> cirExterno;
     
@@ -138,4 +137,12 @@ public class vistaJuego {
         
 }
     
+    public static void limpiarBuffer(){
+        cirExterno.clear();
+        cirInterno.clear();
+        circulosExterno.clear();
+        circulosInterno.clear();
+        labelsExt.clear();
+        labelsInt.clear();
+    }  
 }

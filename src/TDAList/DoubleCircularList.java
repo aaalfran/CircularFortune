@@ -126,6 +126,9 @@ public class DoubleCircularList<E> implements List<E> {
     }
 
     public int size() {
+        if(isEmpty()){
+            return 0;
+        }
         boolean vuelta = false;
         int cont = 0;
         for (Node<E> p = last.getNext(); vuelta != true; p = p.getNext()) {
@@ -142,6 +145,7 @@ public class DoubleCircularList<E> implements List<E> {
 
     }
 
+    @Override
     public E get(int index) {
         if (index < size()) {
             Node<E> n;
@@ -156,6 +160,7 @@ public class DoubleCircularList<E> implements List<E> {
         return null;
     }
 
+    @Override
     public E set(int index, E element) {
         if (index < size()) {
             Node<E> n;
@@ -170,7 +175,15 @@ public class DoubleCircularList<E> implements List<E> {
         }
         return null;
     }
+    
+    public void clear(){
+        
+        this.first = null;
+        this.last = null;
 
+    }
+
+    @Override
     public Iterator<E> iterator() {
         Iterator<E> it = new Iterator<E>() {
             private Node<E> p = last;
