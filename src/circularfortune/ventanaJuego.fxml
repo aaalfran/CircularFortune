@@ -97,5 +97,7 @@
       <Button layoutX="216.0" layoutY="635.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P3" />
       <Button layoutX="120.0" layoutY="635.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P2" />
       <Button fx:id="comodinCambiar" layoutX="26.0" layoutY="635.0" mnemonicParsing="false" onAction="#change" prefHeight="41.0" prefWidth="84.0" text="P1" />
+      <Button fx:id="musicaPause" layoutX="955.0" layoutY="87.0" mnemonicParsing="false" onAction="#pause" text="Silenciar" />
+      <Button fx:id="musicaPlay" layoutX="947.0" layoutY="122.0" mnemonicParsing="false" text="Reproducir" />
    </children>
 </AnchorPane>

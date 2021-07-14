@@ -11,6 +11,8 @@ import static Elements.vistaJuego.cirInterno;
 import TDAList.DoubleCircularList;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,11 +50,17 @@ public class ChangeController implements Initializable {
     @FXML
     void confirmarCambio(ActionEvent event) {
 
-        int numInterno = Integer.parseInt(interno.getText());
-        int numExterno = Integer.parseInt(externo.getText());
-        DoubleCircularList.changePosition(vistaJuego.cirInterno,vistaJuego.cirExterno, numInterno, numExterno);
-        vistaJuego.actualizarValores(interno.getText(), interno.getText());
-        Stage s = (Stage)confirmar.getScene().getWindow();
+        interno.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                interno.setText(newValue.replaceAll("[^\\d]", ""));
+                externo.setText(newValue.replaceAll("[^\\d]", ""));
+            }else if (!interno.getText().equals("") && !externo.getText().equals("")) {
+                DoubleCircularList.changePosition(vistaJuego.cirInterno, vistaJuego.cirExterno, Integer.parseInt(interno.getText()), Integer.parseInt(externo.getText()));
+                vistaJuego.actualizarValores(interno.getText(), interno.getText());
+            }
+        });
+        
+        Stage s = (Stage) confirmar.getScene().getWindow();
         s.close();
 
     }

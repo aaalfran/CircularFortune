@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -59,6 +60,29 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     private Button comodinCambiar;
+    
+     @FXML
+    private Button musicaPause;
+
+    @FXML
+    private Button musicaPlay;
+    
+    // reproduce o pausa la musica
+    @FXML
+    void pause(ActionEvent event) {
+        
+        CircularFortune.musicaInicio.stop();
+        CircularFortune.musicaJuego.stop();
+        
+        musicaPlay.setOnAction((new EventHandler<ActionEvent>() {
+            @Override
+            
+            public void handle(ActionEvent event) {
+              CircularFortune.musicaJuego.play();
+            }
+        }));
+
+    }
 
     //Acciones de la ventana principal del juego
     @FXML
