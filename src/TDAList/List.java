@@ -35,4 +35,5 @@ public interface List<E> extends Iterable<E> {
     public boolean isEmpty(); // la lista vacia
 
     public void clear(); // elimina los elementos
+    
 }

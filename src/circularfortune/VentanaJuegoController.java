@@ -60,25 +60,28 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     private Button comodinCambiar;
-    
-     @FXML
+
+    @FXML
     private Button musicaPause;
 
     @FXML
     private Button musicaPlay;
-    
+
+    @FXML
+    private Button comodin2;
+
     // reproduce o pausa la musica
     @FXML
     void pause(ActionEvent event) {
-        
+
         CircularFortune.musicaInicio.stop();
         CircularFortune.musicaJuego.stop();
-        
+
         musicaPlay.setOnAction((new EventHandler<ActionEvent>() {
             @Override
-            
+
             public void handle(ActionEvent event) {
-              CircularFortune.musicaJuego.play();
+                CircularFortune.musicaJuego.play();
             }
         }));
 
@@ -238,18 +241,35 @@ public class VentanaJuegoController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.showAndWait();
-            
-            
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-      ;
-        
+        ;
+
+    }
+
+    @FXML
+    void cambioElemento(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("cambio.fxml"));
+        try {
+            Parent root = loader.load();
+            CambioController controlador = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     public void JuegoTerminado() throws IOException {
         boolean terminado = false;
-        
+
         System.out.println(circulosInterno.size());
 
         if (score.getText().equals(apuesta.getText()) || circulosInterno.isEmpty()) {

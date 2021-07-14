@@ -134,7 +134,7 @@ public class vistaJuego {
     }
 
     public static void actualizarValores(String interior, String exterior) {
-        
+
         int con1 = Integer.parseInt(interior);
         int con2 = Integer.parseInt(exterior);
         String elementInt = String.valueOf(cirInterno.get(con1));
@@ -143,7 +143,35 @@ public class vistaJuego {
         Label l2 = labelsExt.get(con2);
         l.setText(elementExt);
         l2.setText(elementInt);
-        
+
+    }
+
+    public static void actualizarValoresCirculos(int lista, String PosElemento, String NuevoElement) {
+        int pos = Integer.valueOf(PosElemento);
+        int nuevo = Integer.valueOf(NuevoElement);
+        if (lista == 0) {
+            for (Label l : labelsInt) {
+                if (l.getText().equals(String.valueOf(cirInterno.get(pos)))) {
+                    l.setText(NuevoElement);
+                    cirInterno.set(pos, nuevo);
+
+                }
+
+            }
+
+        } else if (lista == 1) {
+
+            for (Label l : labelsExt) {
+                if (l.getText().equals(String.valueOf(cirExterno.get(pos)))) {
+                    l.setText(NuevoElement);
+                    cirExterno.set(pos, nuevo);
+
+                }
+
+            }
+
+        }
+
     }
 
     //Elimina los elementos de Listas.
