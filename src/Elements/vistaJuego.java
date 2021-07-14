@@ -23,13 +23,16 @@ import javafx.scene.text.FontWeight;
  */
 public class vistaJuego {
 
+    
     public static ArrayList<DoubleCircularList<Integer>> CicularLists;
     public static DoubleCircularList<Integer> cirInterno;
     public static DoubleCircularList<Integer> cirExterno;
     
     //Arreglos con las labels para actualizar
-    public static ArrayList<Label> labelsExt = new ArrayList<>();;
-    public static ArrayList<Label> labelsInt = new ArrayList<>();;
+    public static ArrayList<Label> labelsExt = new ArrayList<>();
+    public static ArrayList<Label> labelsInt = new ArrayList<>();
+    public static ArrayList<Node> circulosInterno= new ArrayList<>();
+    public static ArrayList<Node> circulosExterno= new ArrayList<>();
 
 
     public static Circle getCirculoExt() {
@@ -57,6 +60,7 @@ public class vistaJuego {
     public static void fijarCirculos(AnchorPane anchor) {
         cirExterno = new DoubleCircularList<>();
         cirInterno = new DoubleCircularList<>();
+        circulosInterno = new ArrayList<>();
         Random rd = new Random();
 
         int numCirculos = SettingsController.cantidadCirculos;
@@ -65,7 +69,7 @@ public class vistaJuego {
 
         //Elementos del Circulo Interno
         int radioMenor = 125;
-        
+
         for (int i = 0; i < numCirculos; i++) {
             double angle = 2 * i * Math.PI / numCirculos;
             double xOffset = radioMenor * Math.cos(angle);
@@ -81,13 +85,13 @@ public class vistaJuego {
             l.setLayoutX(x - 10);
             l.setLayoutY(y - 10);
             l.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            circulosInterno.addLast(n);
             labelsInt.addLast(l);
-            anchor.getChildren().addAll(n, l);    
-
+            anchor.getChildren().addAll(n, l);
+              
+            
         }
-        
-       
-        
+
         //Elementos del circulo Externo
         //Circulos Externos
         int radioMayor = 275;
@@ -101,18 +105,18 @@ public class vistaJuego {
             //Se generan valores aleatorios a las etiquetas
             Integer num = rd.nextInt(9);
             cirExterno.addLast(num);
-            
+
             //Etiquetas del Circulo Externo
             Node n = new Node(x, y, 40);
             Label l = new Label(num.toString());
             l.setLayoutX(x - 10);
             l.setLayoutY(y - 10);
             l.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            circulosExterno.addLast(n);
             labelsExt.addLast(l);
             anchor.getChildren().addAll(n, l);
 
         }
-    
         
         
     }

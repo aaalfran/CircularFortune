@@ -3,6 +3,8 @@ package circularfortune;
 import Elements.vistaJuego;
 import static Elements.vistaJuego.cirExterno;
 import static Elements.vistaJuego.cirInterno;
+import static Elements.vistaJuego.circulosInterno;
+import static Elements.vistaJuego.labelsInt;
 import TDAList.DoubleCircularList;
 import static circularfortune.CircularFortune.musicaInicio;
 import static circularfortune.CircularFortune.musicaJuego;
@@ -28,6 +30,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 public class VentanaJuegoController implements Initializable{
     //Ventana Principal
@@ -65,6 +68,53 @@ public class VentanaJuegoController implements Initializable{
 
     @FXML
     void clickElim(ActionEvent event) {
+        String indice = JOptionPane.showInputDialog("Ingrese el índice del círculo a eliminar: ");
+        if (indice.equals("0") || indice.equals("1") || indice.equals("2")
+                || indice.equals("3") || indice.equals("4") || indice.equals("5")
+                || indice.equals("6") || indice.equals("7") || indice.equals("8") || indice.equals("9")) {
+
+            if (Integer.parseInt(indice) < circulosInterno.size()) {
+                //Eliminar Círculos  
+                for (int i = 0; i < circulosInterno.size(); i++) {
+                    Node eliminarCInterno = circulosInterno.get(i);
+                    Node eliminarCExterno = vistaJuego.circulosExterno.get(i);
+                    Label eliminarLInterno = labelsInt.get(i);
+                    Label eliminarLExterno = vistaJuego.labelsExt.get(i);
+                    anchor.getChildren().remove(eliminarCInterno);
+                    anchor.getChildren().remove(eliminarLInterno);
+                    anchor.getChildren().remove(eliminarCExterno);
+                    anchor.getChildren().remove(eliminarLExterno);
+                }
+                //ACTUALIZACIÓN DE LISTAS
+                cirInterno.remove(Integer.parseInt(indice));
+                cirExterno.remove(Integer.parseInt(indice));
+                circulosInterno.remove(Integer.parseInt(indice));
+                labelsInt.remove(Integer.parseInt(indice));
+                vistaJuego.circulosExterno.remove(Integer.parseInt(indice));
+                vistaJuego.labelsExt.remove(Integer.parseInt(indice));
+
+                //AÑADIR CÍRCULOS
+                for (int j = 0; j < circulosInterno.size(); j++) {
+                    Node nI = circulosInterno.get(j);
+                    Label lI = labelsInt.get(j);
+                    Node nE = vistaJuego.circulosExterno.get(j);
+                    Label lE = vistaJuego.labelsExt.get(j);
+
+                    anchor.getChildren().addAll(nI, lI);
+                    anchor.getChildren().addAll(nE, lE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Error ingrese solmanente"
+                        + "´ números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "¡Error ingrese solmanente"
+                    + "´ números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
+        }
+        Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+        score.setText(tot.toString());
+
         playSound("eliminar");
     }
 
