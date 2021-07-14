@@ -18,6 +18,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,6 +27,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Circle;
@@ -52,28 +56,43 @@ public class VentanaJuegoController implements Initializable{
 
     @FXML
     private Label apuesta;
- 
+    
     //Acciones de la ventana principal del juego
 
     @FXML
-    void clickDer(ActionEvent event) {
-        playSound("derecha");
+    void clickDer(ActionEvent event) throws IOException {
         
+        rotIzq.setDisable(true);
+        rotDer.setDisable(true);
+        eliminar.setDisable(false);
+        
+        playSound("derecha");
         
         DoubleCircularList.moveRigth(cirExterno);
         DoubleCircularList.moveRigth(cirInterno);
         vistaJuego.actualizarValoresCirculos();
+        
+        Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+        score.setText(tot.toString());
+        
+        JuegoTerminado();
 
     }
 
     @FXML
-    void clickElim(ActionEvent event) {
+    void clickElim(ActionEvent event) throws IOException {
+        rotIzq.setDisable(true);
+        rotDer.setDisable(true);
+        playSound("eliminar");
         String indice = JOptionPane.showInputDialog("Ingrese el índice del círculo a eliminar: ");
         if (indice.equals("0") || indice.equals("1") || indice.equals("2")
                 || indice.equals("3") || indice.equals("4") || indice.equals("5")
                 || indice.equals("6") || indice.equals("7") || indice.equals("8") || indice.equals("9")) {
-
+            
             if (Integer.parseInt(indice) < circulosInterno.size()) {
+                eliminar.setDisable(true);
+                rotIzq.setDisable(false);
+                rotDer.setDisable(false);
                 //Eliminar Círculos  
                 for (int i = 0; i < circulosInterno.size(); i++) {
                     Node eliminarCInterno = circulosInterno.get(i);
@@ -114,16 +133,24 @@ public class VentanaJuegoController implements Initializable{
         }
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
         score.setText(tot.toString());
-
-        playSound("eliminar");
+        JuegoTerminado();
     }
 
     @FXML
-    void clickIzq(ActionEvent event) {
+    void clickIzq(ActionEvent event) throws IOException {
+        rotIzq.setDisable(true);
+        rotIzq.setBlendMode(BlendMode.BLUE);
+        rotDer.setDisable(true);
+        eliminar.setDisable(false);
         playSound("izquierda");
         DoubleCircularList.moveLeft(cirExterno);
         DoubleCircularList.moveLeft(cirInterno);
         vistaJuego.actualizarValoresCirculos();
+        
+        Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+        score.setText(tot.toString());
+        
+        JuegoTerminado();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -142,7 +169,11 @@ public class VentanaJuegoController implements Initializable{
        vistaJuego.fijarCirculos(anchor);
        Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno,vistaJuego.cirInterno);
        score.setText(tot.toString());
-       System.out.println(cirExterno.size());
+       
+       System.out.println(apuestaIni);
+       
+       
+       
 
     }
     @FXML
@@ -169,6 +200,36 @@ public class VentanaJuegoController implements Initializable{
                 playSound("click");
                 
             }
+    }
+    
+    
+    public void JuegoTerminado() throws IOException{
+        boolean terminado = false;
+        System.out.println(circulosInterno.size());
+        
+        if(score.getText().equals(apuesta.getText()) || circulosInterno.isEmpty()){
+            
+            terminado = true;
+        }
+        
+        if(terminado){
+            System.out.println("Juego terminado");
+            Stage st = (Stage) anchor.getScene().getWindow();
+            Alert.AlertType mensajeFinal = Alert.AlertType.INFORMATION;
+            Alert alert = new Alert(mensajeFinal,"");
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.initOwner(st);
+            alert.getDialogPane().setContentText("Se lo va a regresar al menu principal");
+            alert.getDialogPane().setHeaderText("JUEGO TERMINADO");
+            alert.showAndWait();
+            
+            playSound("click");
+            Parent root = FXMLLoader.load(getClass().getResource("menuinicio.fxml"));
+            Scene scene = new Scene(root);
+            st.setScene(scene);
+            st.show();
+        }
+        
     }
     public void playSound(String s){
         switch (s) {

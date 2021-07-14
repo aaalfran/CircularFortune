@@ -5,6 +5,11 @@
  */
 package TDAList;
 
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
@@ -52,4 +57,24 @@ public class Node<E> extends Circle{
     public void setNext(Node<E> next) {
         this.next = next;
     }
+    
+    /*
+    
+    public  void clickCircle(Node n){
+        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println(n.getContent());
+            }
+        });
+        
+        this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                n.setCursor(Cursor.HAND);
+            }
+        });
+           
+    }
+*/
 }

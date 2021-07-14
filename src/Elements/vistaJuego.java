@@ -135,7 +135,7 @@ public class vistaJuego {
             l.setText(cirInterno.get(contadorInt).toString());
             contadorInt ++;
         }
-       
-    }
-
+        
+}
+    
 }
