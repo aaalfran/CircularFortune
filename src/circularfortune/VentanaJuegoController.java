@@ -225,6 +225,7 @@ public class VentanaJuegoController implements Initializable {
 
     public void JuegoTerminado() throws IOException {
         boolean terminado = false;
+        
         System.out.println(circulosInterno.size());
 
         if (score.getText().equals(apuesta.getText()) || circulosInterno.isEmpty()) {
@@ -239,7 +240,7 @@ public class VentanaJuegoController implements Initializable {
             Alert alert = new Alert(mensajeFinal, "");
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.initOwner(st);
-            alert.getDialogPane().setContentText("Se lo va a regresar al menu principal");
+            alert.getDialogPane().setContentText("Se  lo va a regresar al menu principal");
             alert.getDialogPane().setHeaderText("JUEGO TERMINADO");
             alert.showAndWait();
 

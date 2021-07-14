@@ -10,6 +10,7 @@ import java.util.Iterator;
 /**
  *
  * @author fabri
+ * @param <E>
  */
 public class DoubleCircularList<E> implements List<E> {
 
@@ -21,6 +22,7 @@ public class DoubleCircularList<E> implements List<E> {
         last = null;
     }
 
+    @Override
     public void add(int index, E element) {
         if (index == 0) {
             addFirst(element);
@@ -47,6 +49,7 @@ public class DoubleCircularList<E> implements List<E> {
 
     }
 
+    @Override
     public E removeFirst() {
         E temp = first.getContent();
         first = first.getNext();
@@ -55,6 +58,7 @@ public class DoubleCircularList<E> implements List<E> {
         return temp;
     }
 
+    @Override
     public E removeLast() {
         E temp = last.getContent();
         last = last.getPrevius();
@@ -63,6 +67,7 @@ public class DoubleCircularList<E> implements List<E> {
         return temp;
     }
 
+    @Override
     public E remove(int index) {
         if (isEmpty()) {
             return null;
@@ -91,6 +96,7 @@ public class DoubleCircularList<E> implements List<E> {
         return null;
     }
 
+    @Override
     public void addFirst(E element) {
         Node<E> n = new Node<>(element);
         if (isEmpty()) {
@@ -108,6 +114,7 @@ public class DoubleCircularList<E> implements List<E> {
 
     }
 
+    @Override
     public void addLast(E element) {
         Node n = new Node<>(element);
         if (isEmpty()) {
@@ -125,6 +132,7 @@ public class DoubleCircularList<E> implements List<E> {
 
     }
 
+    @Override
     public int size() {
         if (isEmpty()) {
             return 0;
@@ -140,6 +148,7 @@ public class DoubleCircularList<E> implements List<E> {
         return cont;
     }
 
+    @Override
     public boolean isEmpty() {
         return last == null;
 
@@ -176,6 +185,7 @@ public class DoubleCircularList<E> implements List<E> {
         return null;
     }
 
+    @Override
     public void clear() {
 
         this.first = null;
@@ -276,6 +286,7 @@ public class DoubleCircularList<E> implements List<E> {
         return -1;
     }
 
+    @Override
     public String toString() {
         String acumulador = "";
         Node<E> p = first;
@@ -292,12 +303,11 @@ public class DoubleCircularList<E> implements List<E> {
 
         if (interior.get(posicion) != null && exterior.get(posicion2) != null) {
 
-  
             int elementInt = interior.get(posicion);
             int elementExt = exterior.get(posicion2);
             interior.set(posicion, elementExt);
             exterior.set(posicion2, elementInt);
-           
+
         }
 
     }

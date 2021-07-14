@@ -10,6 +10,7 @@ import java.util.Iterator;
 /**
  *
  * @author fabri
+ * @param <E>
  */
 public class ArrayList<E> implements List<E> {
 
@@ -43,6 +44,7 @@ public class ArrayList<E> implements List<E> {
         }
     }
 
+    @Override
     public void addLast(E e) {
         if (effectiveSize == 0) {
             elements[0] = e;
@@ -58,6 +60,7 @@ public class ArrayList<E> implements List<E> {
         }
     }
 
+    @Override
     public E removeFirst() {
         E temp = null;
         for (int i = 0; i < effectiveSize; i++) {
@@ -69,6 +72,7 @@ public class ArrayList<E> implements List<E> {
         return temp;
     }
 
+    @Override
     public E removeLast() {
         E temp = elements[effectiveSize - 1];
         elements[effectiveSize - 1] = null;
@@ -76,11 +80,13 @@ public class ArrayList<E> implements List<E> {
         return temp;
     }
 
+    @Override
     public int size() {
         int tamnio = effectiveSize;
         return tamnio;
     }
 
+    @Override
     public boolean isEmpty() {
         if (effectiveSize == 0) {
             return true;
@@ -89,6 +95,7 @@ public class ArrayList<E> implements List<E> {
         }
     }
 
+    @Override
     public void clear() {
         for (int i = 0; i <= effectiveSize; i++) {
             elements[i] = null;
@@ -126,6 +133,7 @@ public class ArrayList<E> implements List<E> {
         }
     }
 
+    @Override
     public E get(int index) {
         if (index < 0) {
             return null;
@@ -136,6 +144,7 @@ public class ArrayList<E> implements List<E> {
         }
     }
 
+    @Override
     public E set(int index, E element) {
         E temp = elements[index];
         elements[index] = element;

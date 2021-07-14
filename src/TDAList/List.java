@@ -8,6 +8,7 @@ package TDAList;
 /**
  *
  * @author fabri
+ * @param <E>
  */
 public interface List<E> extends Iterable<E> {
 
@@ -21,7 +22,17 @@ public interface List<E> extends Iterable<E> {
 
     public E remove(int index); // remueve y retorna el elemento en la posición index
 
+    public E removeFirst(); // remueve el elemento al inicio de la lista
+
+    public E removeLast(); // remueve el elemento al final de la lista
+
     public E get(int index); //inserta el indice y obtiene el elemento
 
     public E set(int index, E element); // cambia un element por otro en la misma posicion.
+
+    public int size(); // el numero de elementos
+
+    public boolean isEmpty(); // la lista vacia
+
+    public void clear(); // elimina los elementos
 }
