@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="695.0" prefWidth="1038.0" style="-fx-background-color: #44322E;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circularfortune.VentanaJuegoController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="695.0" prefWidth="1038.0" style="-fx-background-color: #44322E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circularfortune.VentanaJuegoController">
    <children>
       <ImageView fitHeight="793.0" fitWidth="1038.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -96,6 +96,6 @@
       </Label>
       <Button layoutX="216.0" layoutY="635.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P3" />
       <Button layoutX="120.0" layoutY="635.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P2" />
-      <Button layoutX="26.0" layoutY="635.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="84.0" text="P1" />
+      <Button fx:id="comodinCambiar" layoutX="26.0" layoutY="635.0" mnemonicParsing="false" onAction="#change" prefHeight="41.0" prefWidth="84.0" text="P1" />
    </children>
 </AnchorPane>

@@ -36,12 +36,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
-public class VentanaJuegoController implements Initializable{
+public class VentanaJuegoController implements Initializable {
     //Ventana Principal
-    
+
     @FXML
     private AnchorPane anchor;
-    
+
     @FXML
     private Button rotIzq;
 
@@ -56,25 +56,27 @@ public class VentanaJuegoController implements Initializable{
 
     @FXML
     private Label apuesta;
-    
-    //Acciones de la ventana principal del juego
 
     @FXML
+    private Button comodinCambiar;
+
+    //Acciones de la ventana principal del juego
+    @FXML
     void clickDer(ActionEvent event) throws IOException {
-        
+
         rotIzq.setDisable(true);
         rotDer.setDisable(true);
         eliminar.setDisable(false);
-        
+
         playSound("derecha");
-        
+
         DoubleCircularList.moveRigth(cirExterno);
         DoubleCircularList.moveRigth(cirInterno);
         vistaJuego.actualizarValoresCirculos();
-        
+
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
         score.setText(tot.toString());
-        
+
         JuegoTerminado();
 
     }
@@ -88,7 +90,7 @@ public class VentanaJuegoController implements Initializable{
         if (indice.equals("0") || indice.equals("1") || indice.equals("2")
                 || indice.equals("3") || indice.equals("4") || indice.equals("5")
                 || indice.equals("6") || indice.equals("7") || indice.equals("8") || indice.equals("9")) {
-            
+
             if (Integer.parseInt(indice) < circulosInterno.size()) {
                 eliminar.setDisable(true);
                 rotIzq.setDisable(false);
@@ -146,12 +148,13 @@ public class VentanaJuegoController implements Initializable{
         DoubleCircularList.moveLeft(cirExterno);
         DoubleCircularList.moveLeft(cirInterno);
         vistaJuego.actualizarValoresCirculos();
-        
+
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
         score.setText(tot.toString());
-        
+
         JuegoTerminado();
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         musicaInicio.stop();
@@ -159,111 +162,123 @@ public class VentanaJuegoController implements Initializable{
         //Se fija la apuesta inicial
         String apuestaIni = String.valueOf(SettingsController.apuestaIni);
         apuesta.setText(apuestaIni);
-        
-     
+
         //Se agregan los circulos de base
-       anchor.getChildren().add(vistaJuego.getCirculoExt());
-       anchor.getChildren().add(vistaJuego.getCirculoInt());
-        
-       //Se establece el valor del score inicial
-       vistaJuego.fijarCirculos(anchor);
-       Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno,vistaJuego.cirInterno);
-       score.setText(tot.toString());
-       
-       System.out.println(apuestaIni);
-       
-       
-       
+        anchor.getChildren().add(vistaJuego.getCirculoExt());
+        anchor.getChildren().add(vistaJuego.getCirculoInt());
+
+        //Se establece el valor del score inicial
+        vistaJuego.fijarCirculos(anchor);
+        Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+        score.setText(tot.toString());
+
+        System.out.println(apuestaIni);
 
     }
+
     @FXML
-    void clickExitbtn(ActionEvent event) throws IOException{
+    void clickExitbtn(ActionEvent event) throws IOException {
         musicaInicio.play();
         musicaJuego.stop();
         playSound("click");
         Stage st = (Stage) anchor.getScene().getWindow();
         Alert.AlertType tipoAlerta = Alert.AlertType.CONFIRMATION;
-        Alert alerta =  new Alert(tipoAlerta,"");
+        Alert alerta = new Alert(tipoAlerta, "");
         alerta.initModality(Modality.APPLICATION_MODAL);
         alerta.initOwner(st);
         alerta.getDialogPane().setContentText("¿Esta seguro que desea salir del juego?");
         alerta.getDialogPane().setHeaderText("Si sale perdera todo su progeso en el juego ");
         Optional<ButtonType> resultado = alerta.showAndWait();
-            if(resultado.get() == ButtonType.OK){
-                playSound("click");
-                Parent root = FXMLLoader.load(getClass().getResource("menuinicio.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-                vistaJuego.limpiarBuffer();
-            }else{
-                playSound("click");
-                
-            }
+        if (resultado.get() == ButtonType.OK) {
+            playSound("click");
+            Parent root = FXMLLoader.load(getClass().getResource("menuinicio.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+            vistaJuego.limpiarBuffer();
+        } else {
+            playSound("click");
+
+        }
     }
-    
-    
-    public void JuegoTerminado() throws IOException{
+
+    @FXML
+    void change(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("change.fxml"));
+        try {
+            Parent root = loader.load();
+            ChangeController controlador = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+            
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+      ;
+        
+    }
+
+    public void JuegoTerminado() throws IOException {
         boolean terminado = false;
         System.out.println(circulosInterno.size());
-        
-        if(score.getText().equals(apuesta.getText()) || circulosInterno.isEmpty()){
-            
+
+        if (score.getText().equals(apuesta.getText()) || circulosInterno.isEmpty()) {
+
             terminado = true;
         }
-        
-        if(terminado){
+
+        if (terminado) {
             System.out.println("Juego terminado");
             Stage st = (Stage) anchor.getScene().getWindow();
             Alert.AlertType mensajeFinal = Alert.AlertType.INFORMATION;
-            Alert alert = new Alert(mensajeFinal,"");
+            Alert alert = new Alert(mensajeFinal, "");
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.initOwner(st);
             alert.getDialogPane().setContentText("Se lo va a regresar al menu principal");
             alert.getDialogPane().setHeaderText("JUEGO TERMINADO");
             alert.showAndWait();
-            
+
             playSound("click");
             Parent root = FXMLLoader.load(getClass().getResource("menuinicio.fxml"));
             Scene scene = new Scene(root);
             st.setScene(scene);
             st.show();
-            
+
             vistaJuego.limpiarBuffer();
         }
-        
+
     }
-    public void playSound(String s){
+
+    public void playSound(String s) {
         switch (s) {
-            case "click":
-                {
-                    AudioClip note = new AudioClip(this.getClass().getResource("/resources/clickBoton.wav").toString());
-                    note.play();
-                    break;
-                }
-            case "derecha":
-                {
-                    AudioClip note = new AudioClip(this.getClass().getResource("/resources/der.wav").toString());
-                    note.play();
-                    break;
-                }
-            case "izquierda":
-                {
-                    AudioClip note = new AudioClip(this.getClass().getResource("/resources/izq.wav").toString());
-                    note.play();
-                    break;
-                }
-            case "eliminar":
-                {
-                    AudioClip note = new AudioClip(this.getClass().getResource("/resources/elim.wav").toString());
-                    note.play();
-                    break;
-                }
+            case "click": {
+                AudioClip note = new AudioClip(this.getClass().getResource("/resources/clickBoton.wav").toString());
+                note.play();
+                break;
+            }
+            case "derecha": {
+                AudioClip note = new AudioClip(this.getClass().getResource("/resources/der.wav").toString());
+                note.play();
+                break;
+            }
+            case "izquierda": {
+                AudioClip note = new AudioClip(this.getClass().getResource("/resources/izq.wav").toString());
+                note.play();
+                break;
+            }
+            case "eliminar": {
+                AudioClip note = new AudioClip(this.getClass().getResource("/resources/elim.wav").toString());
+                note.play();
+                break;
+            }
             default:
                 break;
         }
     }
-   
-}
 
+}

@@ -126,7 +126,7 @@ public class DoubleCircularList<E> implements List<E> {
     }
 
     public int size() {
-        if(isEmpty()){
+        if (isEmpty()) {
             return 0;
         }
         boolean vuelta = false;
@@ -175,9 +175,9 @@ public class DoubleCircularList<E> implements List<E> {
         }
         return null;
     }
-    
-    public void clear(){
-        
+
+    public void clear() {
+
         this.first = null;
         this.last = null;
 
@@ -226,7 +226,7 @@ public class DoubleCircularList<E> implements List<E> {
             int valor = iteratorB.next();
             lista2 += valor;
         }
-        return lista1+lista2;
+        return lista1 + lista2;
     }
 
     // mueve los elementos a la derecha y les suma 1
@@ -245,8 +245,9 @@ public class DoubleCircularList<E> implements List<E> {
         }
 
     }
-      // mueve los elementos a la izquierda y les resta 1
-       public static void moveLeft(DoubleCircularList<Integer> c) {
+    // mueve los elementos a la izquierda y les resta 1
+
+    public static void moveLeft(DoubleCircularList<Integer> c) {
         for (int i = c.size() - 1; i >= 0; i--) {
             int e = c.get(i) - 1;
             c.set(i, e);
@@ -256,26 +257,26 @@ public class DoubleCircularList<E> implements List<E> {
         c.addLast(e);
 
     }
-        @Override
-        
+
+    @Override
+
     public int getE(E element) {
         boolean vuelta = false;
         int cont = 0;
         for (Node<E> p = last.getNext(); vuelta != true; p = p.getNext()) {
-          
+
             if (p.getContent() == element) {
                 vuelta = true;
                 return cont;
             }
             cont++;
-           
+
         }
-      
+
         return -1;
     }
-    
-    
-       public String toString() {
+
+    public String toString() {
         String acumulador = "";
         Node<E> p = first;
         for (int n = 0; n < size(); n++) {
@@ -284,6 +285,21 @@ public class DoubleCircularList<E> implements List<E> {
         }
 
         return acumulador;
+    }
+
+    //intercambia elementos de dos listas
+    public static void changePosition(DoubleCircularList<Integer> interior, DoubleCircularList<Integer> exterior, int posicion, int posicion2) {
+
+        if (interior.get(posicion) != null && exterior.get(posicion2) != null) {
+
+  
+            int elementInt = interior.get(posicion);
+            int elementExt = exterior.get(posicion2);
+            interior.set(posicion, elementExt);
+            exterior.set(posicion2, elementInt);
+           
+        }
+
     }
 
 }

@@ -47,16 +47,16 @@ public class ArrayList<E> implements List<E> {
         if (effectiveSize == 0) {
             elements[0] = e;
             effectiveSize += 1;
-         } else if (effectiveSize >= 0) {
+        } else if (effectiveSize >= 0) {
             if (isFull()) {
                 makeSpace();
                 addLast(e);
             } else {
                 elements[effectiveSize] = e;
                 effectiveSize += 1;
-             }
+            }
         }
-     }
+    }
 
     public E removeFirst() {
         E temp = null;
@@ -170,10 +170,10 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        Iterator<E> it = new Iterator<E>(){
-            
+        Iterator<E> it = new Iterator<E>() {
+
             private int index = 0;
-            
+
             @Override
             public boolean hasNext() {
                 return index < effectiveSize;
@@ -185,15 +185,24 @@ public class ArrayList<E> implements List<E> {
                 index++;
                 return tmp;
             }
-            
+
         };
-        
+
         return it;
     }
 
     @Override
     public int getE(E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int cont = 0;
+        for (int i = 0; i < size(); i++) {
+            cont++;
+            if (element == this.get(i)) {
+                return cont;
+            }
+
+        }
+        return -1;
+
     }
 
 }

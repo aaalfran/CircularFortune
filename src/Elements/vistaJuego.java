@@ -23,16 +23,14 @@ import javafx.scene.text.FontWeight;
  */
 public class vistaJuego {
 
-    
     public static DoubleCircularList<Integer> cirInterno;
     public static DoubleCircularList<Integer> cirExterno;
-    
+
     //Arreglos con las labels para actualizar
     public static ArrayList<Label> labelsExt = new ArrayList<>();
     public static ArrayList<Label> labelsInt = new ArrayList<>();
-    public static ArrayList<Node> circulosInterno= new ArrayList<>();
-    public static ArrayList<Node> circulosExterno= new ArrayList<>();
-
+    public static ArrayList<Node> circulosInterno = new ArrayList<>();
+    public static ArrayList<Node> circulosExterno = new ArrayList<>();
 
     public static Circle getCirculoExt() {
 
@@ -87,8 +85,7 @@ public class vistaJuego {
             circulosInterno.addLast(n);
             labelsInt.addLast(l);
             anchor.getChildren().addAll(n, l);
-              
-            
+
         }
 
         //Elementos del circulo Externo
@@ -116,33 +113,46 @@ public class vistaJuego {
             anchor.getChildren().addAll(n, l);
 
         }
+
+    }
+
+    public static void actualizarValoresCirculos() {
+        int contadorExt = 0;
+        int contadorInt = 0;
+        for (Label l : labelsExt) {
+
+            l.setText(cirExterno.get(contadorExt).toString());
+            contadorExt++;
+        }
+
+        for (Label l : labelsInt) {
+
+            l.setText(cirInterno.get(contadorInt).toString());
+            contadorInt++;
+        }
+
+    }
+
+    public static void actualizarValores(String interior, String exterior) {
         
+        int con1 = Integer.parseInt(interior);
+        int con2 = Integer.parseInt(exterior);
+        String elementInt = String.valueOf(cirInterno.get(con1));
+        String elementExt = String.valueOf(cirExterno.get(con2));
+        Label l = labelsInt.get(con1);
+        Label l2 = labelsExt.get(con2);
+        l.setText(elementExt);
+        l2.setText(elementInt);
         
     }
-    
-    public static void actualizarValoresCirculos(){
-        int contadorExt =0;
-        int contadorInt =0;
-        for(Label l : labelsExt){
-            
-            l.setText(cirExterno.get(contadorExt).toString());
-            contadorExt ++;
-        }
-        
-        for(Label l : labelsInt){
-            
-            l.setText(cirInterno.get(contadorInt).toString());
-            contadorInt ++;
-        }
-        
-}
-    
-    public static void limpiarBuffer(){
+
+    //Elimina los elementos de Listas.
+    public static void limpiarBuffer() {
         cirExterno.clear();
         cirInterno.clear();
         circulosExterno.clear();
         circulosInterno.clear();
         labelsExt.clear();
         labelsInt.clear();
-    }  
+    }
 }
