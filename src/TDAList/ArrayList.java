@@ -125,7 +125,7 @@ public class ArrayList<E> implements List<E> {
         } else if (effectiveSize <= index) {
             return null;
         } else {
-            for (int i = index; i < effectiveSize; i++) {
+            for (int i = index; i < effectiveSize-1; i++) {
                 elements[i] = elements[i + 1];
             }
             effectiveSize -= 1;

@@ -157,7 +157,7 @@ public class VentanaJuegoController implements Initializable {
                 labelsInt.remove(Integer.parseInt((String) indice.get()));
                 vistaJuego.circulosExterno.remove(Integer.parseInt((String) indice.get()));
                 vistaJuego.labelsExt.remove(Integer.parseInt((String) indice.get()));
-
+                System.out.println("fdsds"+ circulosInterno.size());
                 //AÑADIR CÍRCULOS
                 for (int j = 0; j < circulosInterno.size(); j++) {
                     Node nI = circulosInterno.get(j);
@@ -183,8 +183,8 @@ public class VentanaJuegoController implements Initializable {
             alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
             alerta.showAndWait();
         }
-        }catch(Exception ex){
-            System.out.println("XD");
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getMessage());
         }
 
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
