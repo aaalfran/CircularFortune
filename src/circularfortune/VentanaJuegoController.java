@@ -271,6 +271,7 @@ public class VentanaJuegoController implements Initializable {
             playSound("click");
 
         }
+        vistaJuego.limpiarBuffer();
     }
 
     @FXML
