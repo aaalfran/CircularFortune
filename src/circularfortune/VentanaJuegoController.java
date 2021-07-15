@@ -27,7 +27,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -35,6 +37,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javax.swing.JOptionPane;
 
 public class VentanaJuegoController implements Initializable {
@@ -113,12 +116,17 @@ public class VentanaJuegoController implements Initializable {
         rotIzq.setDisable(true);
         rotDer.setDisable(true);
         playSound("eliminar");
-        String indice = JOptionPane.showInputDialog("Ingrese el índice del círculo a eliminar: ");
-        if (indice.equals("0") || indice.equals("1") || indice.equals("2")
-                || indice.equals("3") || indice.equals("4") || indice.equals("5")
-                || indice.equals("6") || indice.equals("7") || indice.equals("8") || indice.equals("9")) {
 
-            if (Integer.parseInt(indice) < circulosInterno.size()) {
+        TextInputDialog dialogoTextual = new TextInputDialog();
+        dialogoTextual.setTitle("Eliminación de Círculo");
+        dialogoTextual.setHeaderText("Ingrese un número");
+        dialogoTextual.initStyle(StageStyle.UTILITY);
+        Optional indice = dialogoTextual.showAndWait();
+        System.out.println(indice);
+        if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("3")
+                || indice.get().equals("4") || indice.get().equals("5") || indice.get().equals("6")
+                || indice.get().equals("7") || indice.get().equals("8") || indice.get().equals("9")) {
+            if (Integer.parseInt((String) indice.get()) < circulosInterno.size()) {
                 eliminar.setDisable(true);
                 rotIzq.setDisable(false);
                 rotDer.setDisable(false);
@@ -134,12 +142,12 @@ public class VentanaJuegoController implements Initializable {
                     anchor.getChildren().remove(eliminarLExterno);
                 }
                 //ACTUALIZACIÓN DE LISTAS
-                cirInterno.remove(Integer.parseInt(indice));
-                cirExterno.remove(Integer.parseInt(indice));
-                circulosInterno.remove(Integer.parseInt(indice));
-                labelsInt.remove(Integer.parseInt(indice));
-                vistaJuego.circulosExterno.remove(Integer.parseInt(indice));
-                vistaJuego.labelsExt.remove(Integer.parseInt(indice));
+                cirInterno.remove(Integer.parseInt((String) indice.get()));
+                cirExterno.remove(Integer.parseInt((String) indice.get()));
+                circulosInterno.remove(Integer.parseInt((String) indice.get()));
+                labelsInt.remove(Integer.parseInt((String) indice.get()));
+                vistaJuego.circulosExterno.remove(Integer.parseInt((String) indice.get()));
+                vistaJuego.labelsExt.remove(Integer.parseInt((String) indice.get()));
 
                 //AÑADIR CÍRCULOS
                 for (int j = 0; j < circulosInterno.size(); j++) {
@@ -152,14 +160,21 @@ public class VentanaJuegoController implements Initializable {
                     anchor.getChildren().addAll(nE, lE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "¡Error ingrese solmanente"
-                        + "´ números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
+                Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+                Alert alerta = new Alert(mensajeInfo, "");
+                alerta.initModality(Modality.APPLICATION_MODAL);
+                alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
+                alerta.showAndWait();
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "¡Error ingrese solmanente"
-                    + "´ números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
+            Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+            Alert alerta = new Alert(mensajeInfo, "");
+            alerta.initModality(Modality.APPLICATION_MODAL);
+            alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
+            alerta.showAndWait();
         }
+
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
         score.setText(tot.toString());
         JuegoTerminado();
@@ -183,7 +198,8 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources
+    ) {
         musicaInicio.stop();
         musicaJuego.play();
         //Se fija la apuesta inicial
@@ -231,7 +247,8 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @FXML
-    void change(ActionEvent event) {
+    void change(ActionEvent event
+    ) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("change.fxml"));
         try {
             Parent root = loader.load();
@@ -250,7 +267,8 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @FXML
-    void cambioElemento(ActionEvent event) {
+    void cambioElemento(ActionEvent event
+    ) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("cambio.fxml"));
         try {
             Parent root = loader.load();
