@@ -118,7 +118,7 @@ public class VentanaJuegoController implements Initializable {
         dialogoTextual.initStyle(StageStyle.UTILITY);
         Optional indice = dialogoTextual.showAndWait();
         try {
-            if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("3")
+            if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("2") ||indice.get().equals("3")
                     || indice.get().equals("4") || indice.get().equals("5") || indice.get().equals("6")
                     || indice.get().equals("7") || indice.get().equals("8") || indice.get().equals("9")) {
                 if (Integer.parseInt((String) indice.get()) < circulosInterno.size()) {
@@ -143,7 +143,6 @@ public class VentanaJuegoController implements Initializable {
                     labelsInt.remove(Integer.parseInt((String) indice.get()));
                     vistaJuego.circulosExterno.remove(Integer.parseInt((String) indice.get()));
                     vistaJuego.labelsExt.remove(Integer.parseInt((String) indice.get()));
-                    System.out.println("fdsds" + circulosInterno.size());
                     //AÑADIR CÍRCULOS
                     for (int j = 0; j < circulosInterno.size(); j++) {
                         Node nI = circulosInterno.get(j);
@@ -267,7 +266,7 @@ public class VentanaJuegoController implements Initializable {
             dialogoTextual.setHeaderText("Ingrese los índices de los círculos a intercambiar");
             dialogoTextual.setContentText("Ingrese los Indices separados por coma: Círculo Interior,Círculo Exrterior");
             dialogoTextual.initStyle(StageStyle.UTILITY);
-            //AQUÍ OBTIENES LA RESPUESTA DEL USARIO
+            //AQUÍ OBTIENES LA RESPUESTA D
             Optional<String> respuesta = dialogoTextual.showAndWait();
         } catch (Exception ex) {
             System.out.println("Cerrando Ventana ....");
