@@ -83,7 +83,7 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <CheckBox mnemonicParsing="false" prefHeight="45.0" prefWidth="255.0" text="Usar Comodines">
+                        <CheckBox fx:id="comodines" mnemonicParsing="false" onAction="#activarComodines" prefHeight="45.0" prefWidth="255.0" text="Usar Comodines">
                            <font>
                               <Font size="27.0" />
                            </font>

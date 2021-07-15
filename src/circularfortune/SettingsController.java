@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -27,6 +28,8 @@ public class SettingsController implements Initializable {
     
     public static int cantidadCirculos = 1;
     public static int apuestaIni =0;
+    
+    public static boolean comodinesActivados = false;
 
     @FXML
     private ImageView fondo;
@@ -45,6 +48,9 @@ public class SettingsController implements Initializable {
     
     @FXML
     private TextField apuesta;
+    
+    @FXML
+    private CheckBox comodines;
 
     @FXML
     void clickExit(ActionEvent event) throws IOException {
@@ -93,6 +99,13 @@ public class SettingsController implements Initializable {
         
         
 
+    }
+    
+    @FXML
+    void activarComodines(ActionEvent event) {
+        
+        comodinesActivados = true;
+        
     }
     
     private void playSound(String sonido){

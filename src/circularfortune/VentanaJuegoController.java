@@ -62,16 +62,23 @@ public class VentanaJuegoController implements Initializable {
     private Label apuesta;
 
     @FXML
-    private Button comodinCambiar;
-
-    @FXML
     private Button musicaPause;
 
     @FXML
     private Button musicaPlay;
-
+    
+    //Comodines
+    
+    @FXML
+    private Button comodinCambiar;
+    
     @FXML
     private Button comodin2;
+     
+    @FXML
+    private Button comodin3;
+    
+    
 
     // reproduce o pausa la musica
     @FXML
@@ -209,6 +216,22 @@ public class VentanaJuegoController implements Initializable {
         //Se fija la apuesta inicial
         String apuestaIni = String.valueOf(SettingsController.apuestaIni);
         apuesta.setText(apuestaIni);
+        
+        //Se establecen las reglas del juego
+        
+        if(SettingsController.comodinesActivados){
+            
+            comodinCambiar.setDisable(false);
+            comodin2.setDisable(false);
+            comodin3.setDisable(false);
+            
+        }else{
+            
+            comodinCambiar.setDisable(true);
+            comodin2.setDisable(true);
+            comodin3.setDisable(true);
+            
+        }
 
         //Se agregan los circulos de base
         anchor.getChildren().add(vistaJuego.getCirculoExt());
