@@ -266,7 +266,8 @@ public class VentanaJuegoController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-            vistaJuego.limpiarBuffer();
+            JuegoTerminado();
+            SettingsController.cantidadCirculos =1;
         } else {
             playSound("click");
 
@@ -274,42 +275,11 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @FXML
-    void change(ActionEvent event
-    ) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("change.fxml"));
-        try {
-            Parent root = loader.load();
-            ChangeController controlador = loader.getController();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.showAndWait();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        ;
-
+    void change(ActionEvent event) {
     }
-
+    
     @FXML
-    void cambioElemento(ActionEvent event
-    ) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("cambio.fxml"));
-        try {
-            Parent root = loader.load();
-            CambioController controlador = loader.getController();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.showAndWait();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
+    void cambioElemento(ActionEvent event) {
     }
 
     public void JuegoTerminado() throws IOException {
@@ -340,6 +310,8 @@ public class VentanaJuegoController implements Initializable {
             st.show();
 
             vistaJuego.limpiarBuffer();
+            SettingsController.comodinesActivados = false;
+            SettingsController.cantidadCirculos =1;
         }
 
     }
