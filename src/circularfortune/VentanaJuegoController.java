@@ -8,39 +8,29 @@ import static Elements.vistaJuego.labelsInt;
 import TDAList.DoubleCircularList;
 import static circularfortune.CircularFortune.musicaInicio;
 import static circularfortune.CircularFortune.musicaJuego;
-import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.BlendMode;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
-import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javax.swing.JOptionPane;
 
 public class VentanaJuegoController implements Initializable {
     //Ventana Principal
@@ -68,19 +58,16 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     private Button musicaPlay;
-    
+
     //Comodines
-    
     @FXML
     private Button comodinCambiar;
-    
+
     @FXML
     private Button comodin2;
-     
+
     @FXML
     private Button comodin3;
-    
-    
 
     // reproduce o pausa la musica
     @FXML
@@ -130,44 +117,51 @@ public class VentanaJuegoController implements Initializable {
         dialogoTextual.setHeaderText("Ingrese un número");
         dialogoTextual.initStyle(StageStyle.UTILITY);
         Optional indice = dialogoTextual.showAndWait();
-        System.out.println(indice);
-        try{
-        if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("3")
-                || indice.get().equals("4") || indice.get().equals("5") || indice.get().equals("6")
-                || indice.get().equals("7") || indice.get().equals("8") || indice.get().equals("9")) {
-            if (Integer.parseInt((String) indice.get()) < circulosInterno.size()) {
-                eliminar.setDisable(true);
-                rotIzq.setDisable(false);
-                rotDer.setDisable(false);
-                //Eliminar Círculos  
-                for (int i = 0; i < circulosInterno.size(); i++) {
-                    Node eliminarCInterno = circulosInterno.get(i);
-                    Node eliminarCExterno = vistaJuego.circulosExterno.get(i);
-                    Label eliminarLInterno = labelsInt.get(i);
-                    Label eliminarLExterno = vistaJuego.labelsExt.get(i);
-                    anchor.getChildren().remove(eliminarCInterno);
-                    anchor.getChildren().remove(eliminarLInterno);
-                    anchor.getChildren().remove(eliminarCExterno);
-                    anchor.getChildren().remove(eliminarLExterno);
-                }
-                //ACTUALIZACIÓN DE LISTAS
-                cirInterno.remove(Integer.parseInt((String) indice.get()));
-                cirExterno.remove(Integer.parseInt((String) indice.get()));
-                circulosInterno.remove(Integer.parseInt((String) indice.get()));
-                labelsInt.remove(Integer.parseInt((String) indice.get()));
-                vistaJuego.circulosExterno.remove(Integer.parseInt((String) indice.get()));
-                vistaJuego.labelsExt.remove(Integer.parseInt((String) indice.get()));
-                System.out.println("fdsds"+ circulosInterno.size());
-                //AÑADIR CÍRCULOS
-                for (int j = 0; j < circulosInterno.size(); j++) {
-                    Node nI = circulosInterno.get(j);
-                    Label lI = labelsInt.get(j);
-                    Node nE = vistaJuego.circulosExterno.get(j);
-                    Label lE = vistaJuego.labelsExt.get(j);
+        try {
+            if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("3")
+                    || indice.get().equals("4") || indice.get().equals("5") || indice.get().equals("6")
+                    || indice.get().equals("7") || indice.get().equals("8") || indice.get().equals("9")) {
+                if (Integer.parseInt((String) indice.get()) < circulosInterno.size()) {
+                    eliminar.setDisable(true);
+                    rotIzq.setDisable(false);
+                    rotDer.setDisable(false);
+                    //Eliminar Círculos  
+                    for (int i = 0; i < circulosInterno.size(); i++) {
+                        Node eliminarCInterno = circulosInterno.get(i);
+                        Node eliminarCExterno = vistaJuego.circulosExterno.get(i);
+                        Label eliminarLInterno = labelsInt.get(i);
+                        Label eliminarLExterno = vistaJuego.labelsExt.get(i);
+                        anchor.getChildren().remove(eliminarCInterno);
+                        anchor.getChildren().remove(eliminarLInterno);
+                        anchor.getChildren().remove(eliminarCExterno);
+                        anchor.getChildren().remove(eliminarLExterno);
+                    }
+                    //ACTUALIZACIÓN DE LISTAS
+                    cirInterno.remove(Integer.parseInt((String) indice.get()));
+                    cirExterno.remove(Integer.parseInt((String) indice.get()));
+                    circulosInterno.remove(Integer.parseInt((String) indice.get()));
+                    labelsInt.remove(Integer.parseInt((String) indice.get()));
+                    vistaJuego.circulosExterno.remove(Integer.parseInt((String) indice.get()));
+                    vistaJuego.labelsExt.remove(Integer.parseInt((String) indice.get()));
+                    System.out.println("fdsds" + circulosInterno.size());
+                    //AÑADIR CÍRCULOS
+                    for (int j = 0; j < circulosInterno.size(); j++) {
+                        Node nI = circulosInterno.get(j);
+                        Label lI = labelsInt.get(j);
+                        Node nE = vistaJuego.circulosExterno.get(j);
+                        Label lE = vistaJuego.labelsExt.get(j);
 
-                    anchor.getChildren().addAll(nI, lI);
-                    anchor.getChildren().addAll(nE, lE);
+                        anchor.getChildren().addAll(nI, lI);
+                        anchor.getChildren().addAll(nE, lE);
+                    }
+                } else {
+                    Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+                    Alert alerta = new Alert(mensajeInfo, "");
+                    alerta.initModality(Modality.APPLICATION_MODAL);
+                    alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
+                    alerta.showAndWait();
                 }
+
             } else {
                 Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
                 Alert alerta = new Alert(mensajeInfo, "");
@@ -175,15 +169,7 @@ public class VentanaJuegoController implements Initializable {
                 alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
                 alerta.showAndWait();
             }
-
-        } else {
-            Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
-            Alert alerta = new Alert(mensajeInfo, "");
-            alerta.initModality(Modality.APPLICATION_MODAL);
-            alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
-            alerta.showAndWait();
-        }
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             System.out.println(ex.getMessage());
         }
 
@@ -209,29 +195,28 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources)  {
+    public void initialize(URL location, ResourceBundle resources) {
         musicaInicio.stop();
         musicaJuego.play();
         //Se fija la apuesta inicial
         String apuestaIni = String.valueOf(SettingsController.apuestaIni);
         apuesta.setText(apuestaIni);
-        
+
         //Se establecen las reglas del juego
-        
-        if(SettingsController.comodinesActivados){
-            
+        if (SettingsController.comodinesActivados) {
+
             comodinCambiar.setDisable(false);
             comodin2.setDisable(false);
             comodin3.setDisable(false);
-            
-        }else{
-            
+
+        } else {
+
             comodinCambiar.setDisable(true);
             comodin2.setDisable(true);
             comodin3.setDisable(true);
-            
+
         }
-        
+
         //Se agregan los circulos de base
         anchor.getChildren().add(vistaJuego.getCirculoExt());
         anchor.getChildren().add(vistaJuego.getCirculoInt());
@@ -266,7 +251,7 @@ public class VentanaJuegoController implements Initializable {
             stage.setScene(scene);
             stage.show();
             JuegoTerminado();
-            SettingsController.cantidadCirculos =1;
+            SettingsController.cantidadCirculos = 1;
         } else {
             playSound("click");
 
@@ -276,10 +261,33 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     void change(ActionEvent event) {
+        try {
+            TextInputDialog dialogoTextual = new TextInputDialog();
+            dialogoTextual.setTitle("Comodín 1");
+            dialogoTextual.setHeaderText("Ingrese los índices de los círculos a intercambiar");
+            dialogoTextual.setContentText("Ingrese los Indices separados por coma: Círculo Interior,Círculo Exrterior");
+            dialogoTextual.initStyle(StageStyle.UTILITY);
+            //AQUÍ OBTIENES LA RESPUESTA DEL USARIO
+            Optional<String> respuesta = dialogoTextual.showAndWait();
+        } catch (Exception ex) {
+            System.out.println("Cerrando Ventana ....");
+        }
     }
-    
+
     @FXML
     void cambioElemento(ActionEvent event) {
+        try {
+            TextInputDialog dialogoTextual = new TextInputDialog();
+            dialogoTextual.setTitle("Comodín 2");
+            dialogoTextual.setHeaderText("Lo que va hacer el comodín");
+            dialogoTextual.setContentText("Ingreso");
+            dialogoTextual.initStyle(StageStyle.UTILITY);
+            //AQUÍ OBTIENES LA RESPUESTA DEL USARIO
+            Optional<String> respuesta = dialogoTextual.showAndWait();
+        } catch (Exception ex) {
+            System.out.println("Cerrando Ventana ....");
+        }
+
     }
 
     public void JuegoTerminado() throws IOException {
@@ -311,26 +319,26 @@ public class VentanaJuegoController implements Initializable {
 
             vistaJuego.limpiarBuffer();
             SettingsController.comodinesActivados = false;
-            SettingsController.cantidadCirculos =1;
+            SettingsController.cantidadCirculos = 1;
         }
 
     }
-    
-    public boolean buscarNegativos() throws IOException{
-        if(SettingsController.sinNegativos){
-            for(Integer numInterno : cirInterno){
-            if(numInterno<0){
-                return true;
+
+    public boolean buscarNegativos() throws IOException {
+        if (SettingsController.sinNegativos) {
+            for (Integer numInterno : cirInterno) {
+                if (numInterno < 0) {
+                    return true;
+                }
+            }
+
+            for (Integer numExterno : cirExterno) {
+                if (numExterno < 0) {
+                    return true;
+                }
             }
         }
-        
-        for(Integer numExterno : cirExterno){
-            if(numExterno<0){
-                return true;
-            }
-        }
-        }
-        
+
         return false;
     }
 
