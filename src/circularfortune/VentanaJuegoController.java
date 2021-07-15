@@ -123,6 +123,7 @@ public class VentanaJuegoController implements Initializable {
         dialogoTextual.initStyle(StageStyle.UTILITY);
         Optional indice = dialogoTextual.showAndWait();
         System.out.println(indice);
+        try{
         if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("3")
                 || indice.get().equals("4") || indice.get().equals("5") || indice.get().equals("6")
                 || indice.get().equals("7") || indice.get().equals("8") || indice.get().equals("9")) {
@@ -173,6 +174,9 @@ public class VentanaJuegoController implements Initializable {
             alerta.initModality(Modality.APPLICATION_MODAL);
             alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
             alerta.showAndWait();
+        }
+        }catch(Exception ex){
+            System.out.println("XD");
         }
 
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
