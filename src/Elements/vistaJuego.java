@@ -9,6 +9,7 @@ import TDAList.ArrayList;
 import TDAList.DoubleCircularList;
 import TDAList.Node;
 import circularfortune.SettingsController;
+import circularfortune.VentanaJuegoController;
 import java.util.Random;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -183,4 +184,6 @@ public class vistaJuego {
         labelsExt.clear();
         labelsInt.clear();
     }
+    
+    
 }

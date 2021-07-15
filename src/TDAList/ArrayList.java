@@ -97,7 +97,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void clear() {
-        for (int i = 0; i <= effectiveSize; i++) {
+        for (int i = 0; i < effectiveSize; i++) {
             elements[i] = null;
         }
         effectiveSize = 0;

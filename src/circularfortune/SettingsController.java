@@ -30,6 +30,7 @@ public class SettingsController implements Initializable {
     public static int apuestaIni =0;
     
     public static boolean comodinesActivados = false;
+    public static boolean sinNegativos = false;
 
     @FXML
     private ImageView fondo;
@@ -51,6 +52,10 @@ public class SettingsController implements Initializable {
     
     @FXML
     private CheckBox comodines;
+    
+    
+    @FXML
+    private CheckBox noNegativos;
 
     @FXML
     void clickExit(ActionEvent event) throws IOException {
@@ -106,6 +111,11 @@ public class SettingsController implements Initializable {
         
         comodinesActivados = true;
         
+    }
+    
+    @FXML
+    void noNegativos(ActionEvent event) {
+        sinNegativos = true;
     }
     
     private void playSound(String sonido){

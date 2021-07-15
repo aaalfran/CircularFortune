@@ -40,7 +40,7 @@ public class menuinicioController {
 
     @FXML
     private Button musicaPlay;
-
+/*
     @FXML
     void pause(ActionEvent event) {
         
@@ -56,7 +56,7 @@ public class menuinicioController {
         }));
 
     }
-
+*/
     @FXML
     void click(ActionEvent event) throws IOException {
         playSound();

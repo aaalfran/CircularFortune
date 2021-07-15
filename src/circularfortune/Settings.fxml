@@ -88,7 +88,7 @@
                               <Font size="27.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" prefHeight="49.0" prefWidth="333.0" text="No permitir negativos">
+                        <CheckBox fx:id="noNegativos" mnemonicParsing="false" onAction="#noNegativos" prefHeight="49.0" prefWidth="333.0" text="No permitir negativos">
                            <font>
                               <Font size="27.0" />
                            </font>

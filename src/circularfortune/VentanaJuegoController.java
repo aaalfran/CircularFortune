@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -113,7 +115,6 @@ public class VentanaJuegoController implements Initializable {
 
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
         score.setText(tot.toString());
-
         JuegoTerminado();
 
     }
@@ -204,13 +205,11 @@ public class VentanaJuegoController implements Initializable {
 
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
         score.setText(tot.toString());
-
         JuegoTerminado();
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources
-    ) {
+    public void initialize(URL location, ResourceBundle resources)  {
         musicaInicio.stop();
         musicaJuego.play();
         //Se fija la apuesta inicial
@@ -232,7 +231,7 @@ public class VentanaJuegoController implements Initializable {
             comodin3.setDisable(true);
             
         }
-
+        
         //Se agregan los circulos de base
         anchor.getChildren().add(vistaJuego.getCirculoExt());
         anchor.getChildren().add(vistaJuego.getCirculoInt());
@@ -287,7 +286,7 @@ public class VentanaJuegoController implements Initializable {
 
         System.out.println(circulosInterno.size());
 
-        if (score.getText().equals(apuesta.getText()) || circulosInterno.isEmpty()) {
+        if (score.getText().equals(apuesta.getText()) || circulosInterno.isEmpty() || buscarNegativos()) {
 
             terminado = true;
         }
@@ -314,6 +313,24 @@ public class VentanaJuegoController implements Initializable {
             SettingsController.cantidadCirculos =1;
         }
 
+    }
+    
+    public boolean buscarNegativos() throws IOException{
+        if(SettingsController.sinNegativos){
+            for(Integer numInterno : cirInterno){
+            if(numInterno<0){
+                return true;
+            }
+        }
+        
+        for(Integer numExterno : cirExterno){
+            if(numExterno<0){
+                return true;
+            }
+        }
+        }
+        
+        return false;
     }
 
     public void playSound(String s) {
