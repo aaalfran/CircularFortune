@@ -388,6 +388,8 @@ public class VentanaJuegoController implements Initializable {
                             vistaJuego.actualizarValoresCirculos();
                             Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
                             score.setText(tot.toString());
+                            JuegoTerminado();
+                            
 
                         }
                         if (numEleccion == 1) {
@@ -395,6 +397,7 @@ public class VentanaJuegoController implements Initializable {
                             vistaJuego.actualizarValoresCirculos();
                             Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
                             score.setText(tot.toString());
+                             JuegoTerminado();
                         }
                         comodin2.setDisable(true);
 
