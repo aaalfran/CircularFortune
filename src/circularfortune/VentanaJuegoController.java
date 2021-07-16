@@ -10,6 +10,7 @@ import static circularfortune.CircularFortune.musicaInicio;
 import static circularfortune.CircularFortune.musicaJuego;
 import java.io.IOException;
 import java.net.URL;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -118,7 +119,7 @@ public class VentanaJuegoController implements Initializable {
         dialogoTextual.initStyle(StageStyle.UTILITY);
         Optional indice = dialogoTextual.showAndWait();
         try {
-            if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("2") ||indice.get().equals("3")
+            if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("2") || indice.get().equals("3")
                     || indice.get().equals("4") || indice.get().equals("5") || indice.get().equals("6")
                     || indice.get().equals("7") || indice.get().equals("8") || indice.get().equals("9")) {
                 if (Integer.parseInt((String) indice.get()) < circulosInterno.size()) {
@@ -268,7 +269,51 @@ public class VentanaJuegoController implements Initializable {
             dialogoTextual.initStyle(StageStyle.UTILITY);
             //AQUÍ OBTIENES LA RESPUESTA D
             Optional<String> respuesta = dialogoTextual.showAndWait();
-        } catch (Exception ex) {
+            try {
+                String s = respuesta.get();
+                int validacion = 0;
+                for (int i = 0; i < s.length(); i++) {
+                    if (String.valueOf(s.charAt(i)).equals(",")
+                            && s.contains(",") && !s.contains(".") && !s.startsWith(",") && !s.endsWith(",") && !s.contains(".")) {
+                        validacion++;
+                    }
+
+                }
+
+                if (validacion == 1) {
+                    String[] indices = s.split(",");
+                    String num1 = indices[0];
+                    String num2 = indices[1];
+                    if (num1.equals("0") || num1.equals("1") || num1.equals("2") || num1.equals("3") || num1.equals("4")
+                            || num1.equals("5") || num1.equals("6") || num1.equals("7")
+                            || num1.equals("8") || num1.equals("9")
+                            || num2.equals("0") || num2.equals("1") || num2.equals("2") || num2.equals("3")
+                            || num2.equals("4") || num2.equals("5") || num2.equals("6")
+                            || num2.equals("7") || num2.equals("8") || num2.equals("9")) {
+
+                        int numI = Integer.parseInt(num1);
+                        int numE = Integer.parseInt(num2);
+                        if (numI < circulosInterno.size()) {
+                      
+                            DoubleCircularList.changePosition(cirInterno, cirExterno, numI, numE);
+                            vistaJuego.actualizarValoresCirculos();
+
+
+                        } else {
+                            ventanaWarning();
+
+                        }
+                    } else {
+                        ventanaWarning();
+                    }
+
+                } else {
+                    ventanaWarning();
+
+                }
+            } catch (NoSuchElementException e) {
+            }
+        } catch (NumberFormatException ex) {
             System.out.println("Cerrando Ventana ....");
         }
     }
@@ -366,6 +411,15 @@ public class VentanaJuegoController implements Initializable {
             default:
                 break;
         }
+    }
+
+    public void ventanaWarning() {
+        Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+        Alert alerta = new Alert(mensajeInfo, "");
+        alerta.initModality(Modality.APPLICATION_MODAL);
+        alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
+        alerta.showAndWait();
+
     }
 
 }

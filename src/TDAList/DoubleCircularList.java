@@ -309,7 +309,7 @@ public class DoubleCircularList<E> implements List<E> {
             exterior.set(posicion2, elementInt);
 
         }
-
+         
     }
 
 }

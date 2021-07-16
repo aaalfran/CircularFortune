@@ -168,16 +168,18 @@ public class vistaJuego {
 
     }
 
-    public static void actualizarValores(String interior, String exterior) {
+    public static void actualizarValores(int interior, int exterior) {
 
-        int con1 = Integer.parseInt(interior);
-        int con2 = Integer.parseInt(exterior);
-        String elementInt = String.valueOf(cirInterno.get(con1));
-        String elementExt = String.valueOf(cirExterno.get(con2));
-        Label l = labelsInt.get(con1);
-        Label l2 = labelsExt.get(con2);
-        l.setText(elementExt);
-        l2.setText(elementInt);
+        String elementInt = String.valueOf(cirInterno.get(interior));
+        Label labelI = labelsInt.get(interior);
+        System.out.println();
+        String elementExt = String.valueOf(cirExterno.get(exterior));
+        Label labelE= labelsExt.get(exterior);
+  
+       //CAMBIO DE ELEMENTOS EN LAS LISTAS LABEL
+//       labelsInt.set(interior, labelE);
+//       labelsExt.set(exterior, labelI);
+       
 
     }
 
