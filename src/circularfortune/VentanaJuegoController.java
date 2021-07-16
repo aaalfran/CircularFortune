@@ -78,7 +78,7 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     private ImageView cross;
-    
+
     boolean musicaActiva = true;
 
     //Acciones de la ventana principal del juego
@@ -252,18 +252,18 @@ public class VentanaJuegoController implements Initializable {
             SettingsController.sinNegativos = false;
         } else {
             playSound("click");
-            if(musicaActiva){
+            if (musicaActiva) {
                 musicaJuego.play();
-            }else{
+            } else {
                 musicaJuego.pause();
             }
         }
-        
-        if(musicaActiva){
-                musicaJuego.play();
-            }else{
-                musicaJuego.pause();
-            }
+
+        if (musicaActiva) {
+            musicaJuego.play();
+        } else {
+            musicaJuego.pause();
+        }
     }
 
     @FXML
@@ -301,10 +301,9 @@ public class VentanaJuegoController implements Initializable {
                         int numI = Integer.parseInt(num1);
                         int numE = Integer.parseInt(num2);
                         if (numI < circulosInterno.size()) {
-                      
+
                             DoubleCircularList.changePosition(cirInterno, cirExterno, numI, numE);
                             vistaJuego.actualizarValoresCirculos();
-
 
                         } else {
                             ventanaWarning();
@@ -330,12 +329,70 @@ public class VentanaJuegoController implements Initializable {
         try {
             TextInputDialog dialogoTextual = new TextInputDialog();
             dialogoTextual.setTitle("Comodín 2");
-            dialogoTextual.setHeaderText("Lo que va hacer el comodín");
-            dialogoTextual.setContentText("Ingreso");
+            dialogoTextual.setHeaderText("Ingresa el circulo al cual le deseas cambiar un numero 0 para el circulo interior y 1 para el exterior");
+            dialogoTextual.setContentText("Ingresa el numero de la lista , la posicion del elemento que deseas cambiar y el muevo elemento separados por comae ejem(0,5,3)");
             dialogoTextual.initStyle(StageStyle.UTILITY);
             //AQUÍ OBTIENES LA RESPUESTA DEL USARIO
             Optional<String> respuesta = dialogoTextual.showAndWait();
-        } catch (Exception ex) {
+            try {
+                String s = respuesta.get();
+                int validacion = 0;
+                for (int i = 0; i < s.length(); i++) {
+                    if (String.valueOf(s.charAt(i)).equals(",")
+                            && s.contains(",") && !s.contains(".") && !s.startsWith(",") && !s.endsWith(",") && !s.contains(".")) {
+                        validacion++;
+                    }
+
+                }
+
+                if (validacion == 2) {
+                    String[] indices = s.split(",");
+                    String num1 = indices[0];
+                    String num2 = indices[1];
+                    String num3 = indices[2];
+
+                    if (num1.equals("0") || num1.equals("1")
+                            || num2.equals("0") || num2.equals("1") || num2.equals("2") || num2.equals("3")
+                            || num2.equals("4") || num2.equals("5") || num2.equals("6")
+                            || num2.equals("7") || num2.equals("8") || num2.equals("9")
+                            || num3.equals("0") || num3.equals("1") || num3.equals("2") || num3.equals("3")
+                            || num3.equals("4") || num3.equals("5") || num3.equals("6")
+                            || num3.equals("7") || num3.equals("8") || num3.equals("9")) {
+
+                        int numEleccion = Integer.parseInt(num1);
+                        int numPos = Integer.parseInt(num2);
+                        int numEle = Integer.parseInt(num3);
+                        if (numPos < circulosInterno.size()) {
+                            if (numEleccion == 0) {
+                                
+                                cirInterno.set(numPos, numEle);
+                                vistaJuego.actualizarValoresCirculos();
+                                Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+                                score.setText(tot.toString());
+
+                            }
+                            if (numEleccion == 1) {
+                                cirExterno.set(numPos, numEle);
+                                vistaJuego.actualizarValoresCirculos();
+                                Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+                                score.setText(tot.toString());
+                            }
+
+                        } else {
+                            ventanaWarning();
+
+                        }
+                    } else {
+                        ventanaWarning();
+                    }
+
+                } else {
+                    ventanaWarning();
+
+                }
+            } catch (NoSuchElementException e) {
+            }
+        } catch (NumberFormatException ex) {
             System.out.println("Cerrando Ventana ....");
         }
 
@@ -353,12 +410,12 @@ public class VentanaJuegoController implements Initializable {
             terminado = true;
             ganador = true;
             System.out.println("Ganador");
-        }else if(circulosInterno.isEmpty()){
+        } else if (circulosInterno.isEmpty()) {
             terminado = true;
             ganador = false;
-            sinCirculos =true;
+            sinCirculos = true;
             System.out.println("Perdedor, sin circulos");
-        }else if(buscarNegativos()){
+        } else if (buscarNegativos()) {
             obtuvoNegativo = true;
             ganador = false;
             terminado = true;
@@ -372,10 +429,9 @@ public class VentanaJuegoController implements Initializable {
             Alert alert = new Alert(mensajeFinal, "");
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.initOwner(st);
-            
+
             //CASOS QUE SE PUEDEN DAR AL TERMINAR EL JUEGO
-            
-            if(ganador){
+            if (ganador) {
                 alert.getDialogPane().setContentText("Su score en el juego ha sido igualado a su apuesta inicial, se lo regresara al menu principal.");
                 alert.getDialogPane().setHeaderText("FELICIDADES!!!!, USTED HA GANADO");
                 ImageView win = new ImageView("/resources/winner.png");
@@ -383,7 +439,7 @@ public class VentanaJuegoController implements Initializable {
                 win.setFitWidth(60);
                 alert.getDialogPane().setGraphic(win);
                 alert.showAndWait();
-            }else if(sinCirculos){
+            } else if (sinCirculos) {
                 alert.getDialogPane().setContentText("Fin del juego, se lo va a regresar al menu principal");
                 alert.getDialogPane().setHeaderText("SE HA QUEDADO SIN CIRCULOS");
                 ImageView loser = new ImageView("/resources/sad.png");
@@ -391,7 +447,7 @@ public class VentanaJuegoController implements Initializable {
                 loser.setFitWidth(60);
                 alert.getDialogPane().setGraphic(loser);
                 alert.showAndWait();
-            }else if(obtuvoNegativo){
+            } else if (obtuvoNegativo) {
                 alert.getDialogPane().setContentText("Cuidado con los ceros para la proxima, se lo regresara al menu principal");
                 alert.getDialogPane().setHeaderText("HA OBTENIDO UN VALOR NEGTIVO");
                 ImageView negative = new ImageView("/resources/negative.png");
@@ -399,7 +455,7 @@ public class VentanaJuegoController implements Initializable {
                 negative.setFitWidth(60);
                 alert.getDialogPane().setGraphic(negative);
                 alert.showAndWait();
-                
+
             }
             playSound("click");
             Parent root = FXMLLoader.load(getClass().getResource("menuinicio.fxml"));
@@ -470,18 +526,18 @@ public class VentanaJuegoController implements Initializable {
         alerta.showAndWait();
 
     }
-    
+
     @FXML
     void clickBotonMusica(ActionEvent event) {
         if (botonMusica.isSelected()) {
-        musicaJuego.pause();
-        cross.setOpacity(1);
-        musicaActiva = false;
-    }else {
-        musicaJuego.play();
-        cross.setOpacity(0);
-        musicaActiva = true;
-    }
+            musicaJuego.pause();
+            cross.setOpacity(1);
+            musicaActiva = false;
+        } else {
+            musicaJuego.play();
+            cross.setOpacity(0);
+            musicaActiva = true;
+        }
     }
 
 }
