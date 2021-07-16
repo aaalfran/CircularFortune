@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="695.0" prefWidth="1038.0" style="-fx-background-color: #44322E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circularfortune.VentanaJuegoController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="695.0" prefWidth="1038.0" style="-fx-background-color: #44322E;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circularfortune.VentanaJuegoController">
    <children>
       <ImageView fitHeight="793.0" fitWidth="1038.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -96,7 +96,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="comodin3" layoutX="216.0" layoutY="635.0" mnemonicParsing="false" onAction="#comodin3action" prefHeight="41.0" prefWidth="84.0" text="P3" />
+      <Button fx:id="reactivar" layoutX="216.0" layoutY="635.0" mnemonicParsing="false" onAction="#reactivarComodines" prefHeight="41.0" prefWidth="84.0" text="P3" />
       <Button fx:id="comodin2" layoutX="120.0" layoutY="635.0" mnemonicParsing="false" onAction="#cambioElemento" prefHeight="41.0" prefWidth="84.0" text="P2" />
       <Button fx:id="comodinCambiar" layoutX="26.0" layoutY="635.0" mnemonicParsing="false" onAction="#change" prefHeight="41.0" prefWidth="84.0" text="P1" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4d3b36" height="67.0" layoutX="896.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="142.0" />

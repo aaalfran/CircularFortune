@@ -71,7 +71,7 @@ public class VentanaJuegoController implements Initializable {
     private Button comodin2;
 
     @FXML
-    private Button comodin3;
+    private Button reactivar;
 
     // reproduce o pausa la musica
     @FXML
@@ -202,13 +202,13 @@ public class VentanaJuegoController implements Initializable {
 
             comodinCambiar.setDisable(false);
             comodin2.setDisable(false);
-            comodin3.setDisable(false);
+            reactivar.setDisable(false);
 
         } else {
 
             comodinCambiar.setDisable(true);
             comodin2.setDisable(true);
-            comodin3.setDisable(true);
+            reactivar.setDisable(true);
 
         }
 
@@ -268,13 +268,13 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @FXML
-    void comodin3action(ActionEvent event) {
+    void reactivarComodines(ActionEvent event) {
         eliminar.setDisable(false);
         rotIzq.setDisable(false);
         rotDer.setDisable(false);
         try {
             JuegoTerminado();
-            comodin3.setDisable(true);
+            reactivar.setDisable(true);
 
         } catch (IOException ex) {
             Logger.getLogger(VentanaJuegoController.class.getName()).log(Level.SEVERE, null, ex);
