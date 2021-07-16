@@ -176,7 +176,17 @@ public class ArrayList<E> implements List<E> {
             return false;
         }
     }
-
+    
+    //NUEVO
+    public boolean isIn(E elemento){
+        for( int i=0;i< effectiveSize;i++){
+            if(elements[i].equals(elemento)){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     @Override
     public Iterator<E> iterator() {
         Iterator<E> it = new Iterator<E>() {

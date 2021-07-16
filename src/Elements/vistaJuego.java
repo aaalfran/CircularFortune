@@ -9,7 +9,8 @@ import TDAList.ArrayList;
 import TDAList.DoubleCircularList;
 import TDAList.Node;
 import circularfortune.SettingsController;
-import circularfortune.VentanaJuegoController;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -32,6 +33,8 @@ public class vistaJuego {
     public static ArrayList<Label> labelsInt = new ArrayList<>();
     public static ArrayList<Node> circulosInterno = new ArrayList<>();
     public static ArrayList<Node> circulosExterno = new ArrayList<>();
+    //Mapa de Colores
+    public static Map<Integer, String> mapaDeColores = new HashMap<Integer, String>();
 
     public static Circle getCirculoExt() {
 
@@ -55,11 +58,35 @@ public class vistaJuego {
         return pbase;
     }
 
+    public static void fijarColores() {
+        mapaDeColores.put(0, "#B2FF33");
+        mapaDeColores.put(1, "#FF7B7B");
+        mapaDeColores.put(2, "#FCFF50");
+        mapaDeColores.put(3, "#69FFDB");
+        mapaDeColores.put(4, "#FC40EF");
+        mapaDeColores.put(5, "#71B1FF");
+        mapaDeColores.put(6, "#FF5733");
+        mapaDeColores.put(7, "#FFF971");
+        mapaDeColores.put(8, "#DAF7A6");
+        mapaDeColores.put(9, "#71FFA7");
+    }
+
     public static void fijarCirculos(AnchorPane anchor) {
+        fijarColores();
+        Random rd = new Random();
         cirExterno = new DoubleCircularList<>();
         cirInterno = new DoubleCircularList<>();
         circulosInterno = new ArrayList<>();
-        Random rd = new Random();
+        ArrayList<Integer> colorRandom = new ArrayList<>();
+        while (colorRandom.size() != 2) {
+            int numero = rd.nextInt(10);
+            if (colorRandom.size() == 0) {
+                colorRandom.addLast(numero);
+            }
+            if (colorRandom.isIn(numero)) {
+                colorRandom.addLast(numero);
+            }
+        }
 
         int numCirculos = SettingsController.cantidadCirculos;
         double centerX = 519;
@@ -76,9 +103,13 @@ public class vistaJuego {
             double y = centerY + yOffset;
 
             //Etiquetas del circulo Interno
-            Integer num = rd.nextInt(9);
+            //Ojo revisar aleatorio
+            Integer num = rd.nextInt(10);
             cirInterno.addLast(num);
             Node n = new Node(x, y, 30);
+            //Un color random
+            String color = mapaDeColores.get(colorRandom.get(0));
+            n.setFill(Paint.valueOf(color));
             Label l = new Label(num.toString());
             l.setLayoutX(x - 10);
             l.setLayoutY(y - 10);
@@ -105,6 +136,9 @@ public class vistaJuego {
 
             //Etiquetas del Circulo Externo
             Node n = new Node(x, y, 40);
+            String color = mapaDeColores.get(colorRandom.get(1));
+            n.setFill(Paint.valueOf(color));
+
             Label l = new Label(num.toString());
             l.setLayoutX(x - 10);
             l.setLayoutY(y - 10);
@@ -184,6 +218,5 @@ public class vistaJuego {
         labelsExt.clear();
         labelsInt.clear();
     }
-    
-    
+
 }
