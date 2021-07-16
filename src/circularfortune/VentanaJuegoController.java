@@ -168,8 +168,8 @@ public class VentanaJuegoController implements Initializable {
                 alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
                 alerta.showAndWait();
             }
-        } catch (NumberFormatException ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Cerrando el programa....");
         }
 
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);

@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="CircularFortune.jar" size="8867315" download="eager" />
+    <jar href="CircularFortune.jar" size="8867259" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="circularfortune.CircularFortune"  name="CircularFortune" />
   <update check="always"/>
