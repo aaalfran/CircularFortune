@@ -78,6 +78,7 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     private ImageView cross;
+    
 
     boolean musicaActiva = true;
 
@@ -265,6 +266,12 @@ public class VentanaJuegoController implements Initializable {
             musicaJuego.pause();
         }
     }
+    
+    @FXML
+    void comodin3action(ActionEvent event){
+    
+    }
+    
 
     @FXML
     void change(ActionEvent event) {
