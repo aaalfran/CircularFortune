@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -267,7 +269,16 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     void comodin3action(ActionEvent event) {
+        eliminar.setDisable(false);
+        rotIzq.setDisable(false);
+        rotDer.setDisable(false);
+        try {
+            JuegoTerminado();
+            comodin3.setDisable(true);
 
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaJuegoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -389,7 +400,6 @@ public class VentanaJuegoController implements Initializable {
                             Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
                             score.setText(tot.toString());
                             JuegoTerminado();
-                            
 
                         }
                         if (numEleccion == 1) {
@@ -397,7 +407,7 @@ public class VentanaJuegoController implements Initializable {
                             vistaJuego.actualizarValoresCirculos();
                             Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
                             score.setText(tot.toString());
-                             JuegoTerminado();
+                            JuegoTerminado();
                         }
                         comodin2.setDisable(true);
 
