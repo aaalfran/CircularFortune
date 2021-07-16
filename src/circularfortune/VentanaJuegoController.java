@@ -25,8 +25,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Modality;
@@ -72,20 +74,12 @@ public class VentanaJuegoController implements Initializable {
 
     // reproduce o pausa la musica
     @FXML
-    void pause(ActionEvent event) {
+    private RadioButton botonMusica;
 
-        CircularFortune.musicaInicio.stop();
-        CircularFortune.musicaJuego.stop();
-
-        musicaPlay.setOnAction((new EventHandler<ActionEvent>() {
-            @Override
-
-            public void handle(ActionEvent event) {
-                CircularFortune.musicaJuego.play();
-            }
-        }));
-
-    }
+    @FXML
+    private ImageView cross;
+    
+    boolean musicaActiva = true;
 
     //Acciones de la ventana principal del juego
     @FXML
@@ -232,8 +226,7 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     void clickExitbtn(ActionEvent event) throws IOException {
-        musicaInicio.play();
-        musicaJuego.stop();
+        musicaJuego.pause();
         playSound("click");
         Stage st = (Stage) anchor.getScene().getWindow();
         Alert.AlertType tipoAlerta = Alert.AlertType.CONFIRMATION;
@@ -250,13 +243,27 @@ public class VentanaJuegoController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-            JuegoTerminado();
+            vistaJuego.limpiarBuffer();
+            musicaJuego.stop();
+            musicaActiva = false;
+            musicaInicio.play();
             SettingsController.cantidadCirculos = 1;
+            SettingsController.comodinesActivados = false;
+            SettingsController.sinNegativos = false;
         } else {
             playSound("click");
-
+            if(musicaActiva){
+                musicaJuego.play();
+            }else{
+                musicaJuego.pause();
+            }
         }
-        vistaJuego.limpiarBuffer();
+        
+        if(musicaActiva){
+                musicaJuego.play();
+            }else{
+                musicaJuego.pause();
+            }
     }
 
     @FXML
@@ -336,12 +343,26 @@ public class VentanaJuegoController implements Initializable {
 
     public void JuegoTerminado() throws IOException {
         boolean terminado = false;
+        boolean ganador = false;
+        boolean obtuvoNegativo = false;
+        boolean sinCirculos = false;
 
         System.out.println(circulosInterno.size());
 
-        if (score.getText().equals(apuesta.getText()) || circulosInterno.isEmpty() || buscarNegativos()) {
-
+        if (score.getText().equals(apuesta.getText())) {
             terminado = true;
+            ganador = true;
+            System.out.println("Ganador");
+        }else if(circulosInterno.isEmpty()){
+            terminado = true;
+            ganador = false;
+            sinCirculos =true;
+            System.out.println("Perdedor, sin circulos");
+        }else if(buscarNegativos()){
+            obtuvoNegativo = true;
+            ganador = false;
+            terminado = true;
+            System.out.println("Perdedor, negativos");
         }
 
         if (terminado) {
@@ -351,18 +372,46 @@ public class VentanaJuegoController implements Initializable {
             Alert alert = new Alert(mensajeFinal, "");
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.initOwner(st);
-            alert.getDialogPane().setContentText("Se  lo va a regresar al menu principal");
-            alert.getDialogPane().setHeaderText("JUEGO TERMINADO");
-            alert.showAndWait();
-
+            
+            //CASOS QUE SE PUEDEN DAR AL TERMINAR EL JUEGO
+            
+            if(ganador){
+                alert.getDialogPane().setContentText("Su score en el juego ha sido igualado a su apuesta inicial, se lo regresara al menu principal.");
+                alert.getDialogPane().setHeaderText("FELICIDADES!!!!, USTED HA GANADO");
+                ImageView win = new ImageView("/resources/winner.png");
+                win.setFitHeight(60);
+                win.setFitWidth(60);
+                alert.getDialogPane().setGraphic(win);
+                alert.showAndWait();
+            }else if(sinCirculos){
+                alert.getDialogPane().setContentText("Fin del juego, se lo va a regresar al menu principal");
+                alert.getDialogPane().setHeaderText("SE HA QUEDADO SIN CIRCULOS");
+                ImageView loser = new ImageView("/resources/sad.png");
+                loser.setFitHeight(60);
+                loser.setFitWidth(60);
+                alert.getDialogPane().setGraphic(loser);
+                alert.showAndWait();
+            }else if(obtuvoNegativo){
+                alert.getDialogPane().setContentText("Cuidado con los ceros para la proxima, se lo regresara al menu principal");
+                alert.getDialogPane().setHeaderText("HA OBTENIDO UN VALOR NEGTIVO");
+                ImageView negative = new ImageView("/resources/negative.png");
+                negative.setFitHeight(60);
+                negative.setFitWidth(60);
+                alert.getDialogPane().setGraphic(negative);
+                alert.showAndWait();
+                
+            }
             playSound("click");
             Parent root = FXMLLoader.load(getClass().getResource("menuinicio.fxml"));
             Scene scene = new Scene(root);
             st.setScene(scene);
             st.show();
-
+            musicaJuego.stop();
+            musicaActiva = false;
+            musicaInicio.play();
             vistaJuego.limpiarBuffer();
             SettingsController.comodinesActivados = false;
+            SettingsController.sinNegativos = false;
             SettingsController.cantidadCirculos = 1;
         }
 
@@ -420,6 +469,19 @@ public class VentanaJuegoController implements Initializable {
         alerta.getDialogPane().setHeaderText("¡Ingrese solmanente números dentro de este Rango(0- " + (circulosInterno.size() - 1) + ")");
         alerta.showAndWait();
 
+    }
+    
+    @FXML
+    void clickBotonMusica(ActionEvent event) {
+        if (botonMusica.isSelected()) {
+        musicaJuego.pause();
+        cross.setOpacity(1);
+        musicaActiva = false;
+    }else {
+        musicaJuego.play();
+        cross.setOpacity(0);
+        musicaActiva = true;
+    }
     }
 
 }

@@ -49,7 +49,5 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="musicaPause" disable="true" layoutX="966.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Silenciar" />
-      <Button fx:id="musicaPlay" disable="true" layoutX="964.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Reproducir" />
    </children>
 </AnchorPane>
