@@ -2,8 +2,6 @@ package circularfortune;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -40,7 +38,8 @@ public class menuinicioController {
 
     @FXML
     private Button musicaPlay;
-/*
+
+    /*
     @FXML
     void pause(ActionEvent event) {
         
@@ -56,7 +55,7 @@ public class menuinicioController {
         }));
 
     }
-*/
+     */
     @FXML
     void click(ActionEvent event) throws IOException {
         playSound();

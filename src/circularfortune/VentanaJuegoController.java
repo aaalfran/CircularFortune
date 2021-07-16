@@ -14,7 +14,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -78,7 +77,6 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     private ImageView cross;
-    
 
     boolean musicaActiva = true;
 
@@ -112,7 +110,7 @@ public class VentanaJuegoController implements Initializable {
         dialogoTextual.setTitle("Eliminación de Círculo");
         dialogoTextual.setHeaderText("Ingrese un número");
         dialogoTextual.initStyle(StageStyle.UTILITY);
-        Optional indice = dialogoTextual.showAndWait();
+        Optional<String> indice = dialogoTextual.showAndWait();
         try {
             if (indice.get().equals("0") || indice.get().equals("1") || indice.get().equals("2") || indice.get().equals("3")
                     || indice.get().equals("4") || indice.get().equals("5") || indice.get().equals("6")
@@ -133,13 +131,13 @@ public class VentanaJuegoController implements Initializable {
                         anchor.getChildren().remove(eliminarLExterno);
                     }
                     //ACTUALIZACIÓN DE LISTAS
-                    cirInterno.remove(Integer.parseInt((String) indice.get()));
-                    cirExterno.remove(Integer.parseInt((String) indice.get()));
-                    circulosInterno.remove(Integer.parseInt((String) indice.get()));
-                    labelsInt.remove(Integer.parseInt((String) indice.get()));
-                    vistaJuego.circulosExterno.remove(Integer.parseInt((String) indice.get()));
-                    vistaJuego.labelsExt.remove(Integer.parseInt((String) indice.get()));
-                    //AÑADIR CÍRCULOS
+                    cirInterno.remove(Integer.parseInt(indice.get()));
+                    cirExterno.remove(Integer.parseInt(indice.get()));
+                    circulosInterno.remove(Integer.parseInt(indice.get()));
+                    labelsInt.remove(Integer.parseInt(indice.get()));
+                    vistaJuego.circulosExterno.remove(Integer.parseInt(indice.get()));
+                    vistaJuego.labelsExt.remove(Integer.parseInt(indice.get()));
+                    //AÑADIR CÍRCULO
                     for (int j = 0; j < circulosInterno.size(); j++) {
                         Node nI = circulosInterno.get(j);
                         Label lI = labelsInt.get(j);
@@ -266,12 +264,11 @@ public class VentanaJuegoController implements Initializable {
             musicaJuego.pause();
         }
     }
-    
+
     @FXML
-    void comodin3action(ActionEvent event){
-    
+    void comodin3action(ActionEvent event) {
+
     }
-    
 
     @FXML
     void change(ActionEvent event) {
@@ -281,7 +278,6 @@ public class VentanaJuegoController implements Initializable {
             dialogoTextual.setHeaderText("Ingrese los índices de los círculos a intercambiar");
             dialogoTextual.setContentText("Ingrese los Indices separados por coma: Círculo Interior,Círculo Exrterior");
             dialogoTextual.initStyle(StageStyle.UTILITY);
-            //AQUÍ OBTIENES LA RESPUESTA D
             Optional<String> respuesta = dialogoTextual.showAndWait();
             try {
                 String s = respuesta.get();
@@ -289,21 +285,30 @@ public class VentanaJuegoController implements Initializable {
                 for (int i = 0; i < s.length(); i++) {
                     if (String.valueOf(s.charAt(i)).equals(",")
                             && s.contains(",") && !s.contains(".") && !s.startsWith(",") && !s.endsWith(",") && !s.contains(".")) {
-                        validacion++;
+                        String[] cadena = s.split(",");
+                        if ((cadena.length) == 2) {
+                            validacion++;
+                        }
                     }
 
                 }
+                if (validacion == 0) {
+                    Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+                    Alert alerta = new Alert(mensajeInfo, "");
+                    alerta.initModality(Modality.APPLICATION_MODAL);
+                    alerta.getDialogPane().setHeaderText("¡Ingrese con este formato n,n!");
+                    alerta.showAndWait();
 
-                if (validacion == 1) {
+                } else if (validacion == 1) {
                     String[] indices = s.split(",");
                     String num1 = indices[0];
                     String num2 = indices[1];
-                    if (num1.equals("0") || num1.equals("1") || num1.equals("2") || num1.equals("3") || num1.equals("4")
+                    if ((num1.equals("0") || num1.equals("1") || num1.equals("2") || num1.equals("3") || num1.equals("4")
                             || num1.equals("5") || num1.equals("6") || num1.equals("7")
-                            || num1.equals("8") || num1.equals("9")
-                            || num2.equals("0") || num2.equals("1") || num2.equals("2") || num2.equals("3")
+                            || num1.equals("8") || num1.equals("9"))
+                            && (num2.equals("0") || num2.equals("1") || num2.equals("2") || num2.equals("3")
                             || num2.equals("4") || num2.equals("5") || num2.equals("6")
-                            || num2.equals("7") || num2.equals("8") || num2.equals("9")) {
+                            || num2.equals("7") || num2.equals("8") || num2.equals("9"))) {
 
                         int numI = Integer.parseInt(num1);
                         int numE = Integer.parseInt(num2);
@@ -311,17 +316,16 @@ public class VentanaJuegoController implements Initializable {
 
                             DoubleCircularList.changePosition(cirInterno, cirExterno, numI, numE);
                             vistaJuego.actualizarValoresCirculos();
+                            comodinCambiar.setDisable(true);
 
                         } else {
                             ventanaWarning();
 
                         }
+
                     } else {
                         ventanaWarning();
                     }
-
-                } else {
-                    ventanaWarning();
 
                 }
             } catch (NoSuchElementException e) {
@@ -341,65 +345,77 @@ public class VentanaJuegoController implements Initializable {
             dialogoTextual.initStyle(StageStyle.UTILITY);
             //AQUÍ OBTIENES LA RESPUESTA DEL USARIO
             Optional<String> respuesta = dialogoTextual.showAndWait();
-            try {
-                String s = respuesta.get();
-                int validacion = 0;
-                for (int i = 0; i < s.length(); i++) {
-                    if (String.valueOf(s.charAt(i)).equals(",")
-                            && s.contains(",") && !s.contains(".") && !s.startsWith(",") && !s.endsWith(",") && !s.contains(".")) {
+
+            String s = respuesta.get();
+            int validacion = 0;
+            for (int i = 0; i < s.length(); i++) {
+                if (String.valueOf(s.charAt(i)).equals(",")
+                        && s.contains(",") && !s.contains(".") && !s.startsWith(",") && !s.endsWith(",") && !s.contains(".")) {
+                    String[] cadena = s.split(",");
+                    if ((cadena.length) >= 3) {
                         validacion++;
                     }
-
                 }
 
-                if (validacion == 2) {
-                    String[] indices = s.split(",");
-                    String num1 = indices[0];
-                    String num2 = indices[1];
-                    String num3 = indices[2];
+            }
+            if (validacion > 2 || validacion < 2) {
+                Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+                Alert alerta = new Alert(mensajeInfo, "");
+                alerta.initModality(Modality.APPLICATION_MODAL);
+                alerta.getDialogPane().setHeaderText("¡Ingrese con este formato n,n,n!");
+                alerta.showAndWait();
+            } else if (validacion == 2) {
+                String[] indices = s.split(",");
+                String num1 = indices[0];
+                String num2 = indices[1];
+                String num3 = indices[2];
 
-                    if (num1.equals("0") || num1.equals("1")
-                            || num2.equals("0") || num2.equals("1") || num2.equals("2") || num2.equals("3")
-                            || num2.equals("4") || num2.equals("5") || num2.equals("6")
-                            || num2.equals("7") || num2.equals("8") || num2.equals("9")
-                            || num3.equals("0") || num3.equals("1") || num3.equals("2") || num3.equals("3")
-                            || num3.equals("4") || num3.equals("5") || num3.equals("6")
-                            || num3.equals("7") || num3.equals("8") || num3.equals("9")) {
+                if ((num1.equals("0") || num1.equals("1"))
+                        && (num2.equals("0") || num2.equals("1") || num2.equals("2") || num2.equals("3")
+                        || num2.equals("4") || num2.equals("5") || num2.equals("6")
+                        || num2.equals("7") || num2.equals("8") || num2.equals("9"))
+                        && (num3.equals("0") || num3.equals("1") || num3.equals("2") || num3.equals("3")
+                        || num3.equals("4") || num3.equals("5") || num3.equals("6")
+                        || num3.equals("7") || num3.equals("8") || num3.equals("9"))) {
 
-                        int numEleccion = Integer.parseInt(num1);
-                        int numPos = Integer.parseInt(num2);
-                        int numEle = Integer.parseInt(num3);
-                        if (numPos < circulosInterno.size()) {
-                            if (numEleccion == 0) {
-                                
-                                cirInterno.set(numPos, numEle);
-                                vistaJuego.actualizarValoresCirculos();
-                                Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
-                                score.setText(tot.toString());
+                    int numEleccion = Integer.parseInt(num1);
+                    int numPos = Integer.parseInt(num2);
+                    int numEle = Integer.parseInt(num3);
+                    if (numPos < circulosInterno.size()) {
+                        if (numEleccion == 0) {
 
-                            }
-                            if (numEleccion == 1) {
-                                cirExterno.set(numPos, numEle);
-                                vistaJuego.actualizarValoresCirculos();
-                                Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
-                                score.setText(tot.toString());
-                            }
-
-                        } else {
-                            ventanaWarning();
+                            cirInterno.set(numPos, numEle);
+                            vistaJuego.actualizarValoresCirculos();
+                            Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+                            score.setText(tot.toString());
 
                         }
+                        if (numEleccion == 1) {
+                            cirExterno.set(numPos, numEle);
+                            vistaJuego.actualizarValoresCirculos();
+                            Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+                            score.setText(tot.toString());
+                        }
+                        comodin2.setDisable(true);
+
+                    } else {
+                        ventanaWarning();
+
+                    }
+                } else {
+                    if (!num1.equals("0") && !num1.equals("1")) {
+                        Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+                        Alert alerta = new Alert(mensajeInfo, "");
+                        alerta.initModality(Modality.APPLICATION_MODAL);
+                        alerta.getDialogPane().setHeaderText("¡El primer número debe ser 0 o 1!");
+                        alerta.showAndWait();
                     } else {
                         ventanaWarning();
                     }
-
-                } else {
-                    ventanaWarning();
-
                 }
-            } catch (NoSuchElementException e) {
+
             }
-        } catch (NumberFormatException ex) {
+        } catch (Exception ex) {
             System.out.println("Cerrando Ventana ....");
         }
 
