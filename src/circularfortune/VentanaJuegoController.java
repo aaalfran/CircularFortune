@@ -104,24 +104,55 @@ public class VentanaJuegoController implements Initializable {
     //Acciones de la ventana principal del juego
     @FXML
     void clickDer(ActionEvent event) throws IOException {
-
-        rotIzq.setDisable(true);
-        rotDer.setDisable(true);
-        eliminar.setDisable(false);
-        blurrDer.setOpacity(0.5);
-        blurrIzq.setOpacity(0.5);
-        blurrElim.setOpacity(0);
-
-        playSound("derecha");
-
-        DoubleCircularList.moveRigth(cirExterno);
-        DoubleCircularList.moveRigth(cirInterno);
-        vistaJuego.actualizarValoresCirculos();
-
-        Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
-        score.setText(tot.toString());
-        JuegoTerminado();
-
+        
+        
+        TextInputDialog dialogoTextual = new TextInputDialog();
+        dialogoTextual.setTitle("Rotar");
+        dialogoTextual.setHeaderText("¿Cual circulo desea rotar?");
+        dialogoTextual.setContentText("Escriba 'interno' o 'externo' : ");
+        dialogoTextual.initStyle(StageStyle.UTILITY);
+        Optional<String> ingreso = dialogoTextual.showAndWait();
+        switch (ingreso.get().toLowerCase()) {
+            case "interno":
+                {
+                    rotIzq.setDisable(true);
+                    rotDer.setDisable(true);
+                    eliminar.setDisable(false);
+                    blurrDer.setOpacity(0.5);
+                    blurrIzq.setOpacity(0.5);
+                    blurrElim.setOpacity(0);
+                    DoubleCircularList.moveRigth(cirInterno);
+                    vistaJuego.actualizarValoresCirculos();
+                    Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+                    score.setText(tot.toString());
+                    playSound("derecha");
+                    JuegoTerminado();
+                    break;
+                }
+            case "externo":
+                {
+                    rotIzq.setDisable(true);
+                    rotDer.setDisable(true);
+                    eliminar.setDisable(false);
+                    blurrDer.setOpacity(0.5);
+                    blurrIzq.setOpacity(0.5);
+                    blurrElim.setOpacity(0);
+                    DoubleCircularList.moveRigth(cirExterno);
+                    vistaJuego.actualizarValoresCirculos();
+                    Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+                    score.setText(tot.toString());
+                    playSound("derecha");
+                    JuegoTerminado();
+                    break;
+                }
+            default:
+                Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+                Alert alerta = new Alert(mensajeInfo, "");
+                alerta.initModality(Modality.APPLICATION_MODAL);
+                alerta.getDialogPane().setHeaderText("El valor ingresado no es valido! Ingrese 'interno' o 'externo'");
+                alerta.showAndWait();
+                break;
+        }
     }
 
     @FXML
@@ -203,20 +234,53 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     void clickIzq(ActionEvent event) throws IOException {
-        rotIzq.setDisable(true);
-        rotDer.setDisable(true);
-        eliminar.setDisable(false);
-        blurrDer.setOpacity(0.5);
-        blurrIzq.setOpacity(0.5);
-        blurrElim.setOpacity(0);
-        playSound("izquierda");
-        DoubleCircularList.moveLeft(cirExterno);
-        DoubleCircularList.moveLeft(cirInterno);
-        vistaJuego.actualizarValoresCirculos();
-
-        Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
-        score.setText(tot.toString());
-        JuegoTerminado();
+        TextInputDialog dialogoTextual = new TextInputDialog();
+        dialogoTextual.setTitle("Rotar");
+        dialogoTextual.setHeaderText("¿Cual circulo desea rotar?");
+        dialogoTextual.setContentText("Escriba 'interno' o 'externo' : ");
+        dialogoTextual.initStyle(StageStyle.UTILITY);
+        Optional<String> ingreso = dialogoTextual.showAndWait();
+        switch (ingreso.get().toLowerCase()) {
+            case "interno":
+                {
+                    rotIzq.setDisable(true);
+                    rotDer.setDisable(true);
+                    eliminar.setDisable(false);
+                    blurrDer.setOpacity(0.5);
+                    blurrIzq.setOpacity(0.5);
+                    blurrElim.setOpacity(0);
+                    DoubleCircularList.moveLeft(cirInterno);
+                    vistaJuego.actualizarValoresCirculos();
+                    Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+                    score.setText(tot.toString());
+                    playSound("izquierda");
+                    JuegoTerminado();
+                    break;
+                }
+            case "externo":
+                {
+                    rotIzq.setDisable(true);
+                    rotDer.setDisable(true);
+                    eliminar.setDisable(false);
+                    blurrDer.setOpacity(0.5);
+                    blurrIzq.setOpacity(0.5);
+                    blurrElim.setOpacity(0);
+                    DoubleCircularList.moveLeft(cirExterno);
+                    vistaJuego.actualizarValoresCirculos();
+                    Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
+                    score.setText(tot.toString());
+                    playSound("izquierda");
+                    JuegoTerminado();
+                    break;
+                }
+            default:
+                Alert.AlertType mensajeInfo = Alert.AlertType.WARNING;
+                Alert alerta = new Alert(mensajeInfo, "");
+                alerta.initModality(Modality.APPLICATION_MODAL);
+                alerta.getDialogPane().setHeaderText("El valor ingresado no es valido! Ingrese 'interno' o 'externo'");
+                alerta.showAndWait();
+                break;
+        }
     }
 
     @Override
