@@ -290,6 +290,9 @@ public class VentanaJuegoController implements Initializable {
         eliminar.setDisable(false);
         rotIzq.setDisable(false);
         rotDer.setDisable(false);
+        blurrDer.setOpacity(0);
+        blurrIzq.setOpacity(0);
+        blurrElim.setOpacity(0);
         try {
             JuegoTerminado();
             reactivar.setDisable(true);
