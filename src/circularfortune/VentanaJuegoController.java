@@ -107,11 +107,12 @@ public class VentanaJuegoController implements Initializable {
         
         
         TextInputDialog dialogoTextual = new TextInputDialog();
-        dialogoTextual.setTitle("Rotar");
+        dialogoTextual.setTitle("Rotacion Derecha");
         dialogoTextual.setHeaderText("¿Cual circulo desea rotar?");
         dialogoTextual.setContentText("Escriba 'interno' o 'externo' : ");
         dialogoTextual.initStyle(StageStyle.UTILITY);
         Optional<String> ingreso = dialogoTextual.showAndWait();
+        try{
         switch (ingreso.get().toLowerCase()) {
             case "interno":
                 {
@@ -153,6 +154,9 @@ public class VentanaJuegoController implements Initializable {
                 alerta.showAndWait();
                 break;
         }
+        }catch(Exception ex){
+            System.out.println("Ventana de ingreso cerrada");
+        }
     }
 
     @FXML
@@ -162,8 +166,6 @@ public class VentanaJuegoController implements Initializable {
         blurrDer.setOpacity(0.5);
         blurrIzq.setOpacity(0.5);
         blurrElim.setOpacity(0);
-        playSound("eliminar");
-
         TextInputDialog dialogoTextual = new TextInputDialog();
         dialogoTextual.setTitle("Eliminación de Círculo");
         dialogoTextual.setHeaderText("Ingrese un número");
@@ -235,11 +237,12 @@ public class VentanaJuegoController implements Initializable {
     @FXML
     void clickIzq(ActionEvent event) throws IOException {
         TextInputDialog dialogoTextual = new TextInputDialog();
-        dialogoTextual.setTitle("Rotar");
+        dialogoTextual.setTitle("Rotacion Izquierda");
         dialogoTextual.setHeaderText("¿Cual circulo desea rotar?");
         dialogoTextual.setContentText("Escriba 'interno' o 'externo' : ");
         dialogoTextual.initStyle(StageStyle.UTILITY);
         Optional<String> ingreso = dialogoTextual.showAndWait();
+        try{
         switch (ingreso.get().toLowerCase()) {
             case "interno":
                 {
@@ -280,6 +283,9 @@ public class VentanaJuegoController implements Initializable {
                 alerta.getDialogPane().setHeaderText("El valor ingresado no es valido! Ingrese 'interno' o 'externo'");
                 alerta.showAndWait();
                 break;
+        }
+        }catch(Exception ex){
+            System.out.println("Ventana de ingreso cerrada");
         }
     }
 
