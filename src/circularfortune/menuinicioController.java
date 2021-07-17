@@ -33,29 +33,7 @@ public class menuinicioController {
     @FXML
     private Button exit;
 
-    @FXML
-    private Button musicaPause;
-
-    @FXML
-    private Button musicaPlay;
-
-    /*
-    @FXML
-    void pause(ActionEvent event) {
-        
-        CircularFortune.musicaInicio.stop();
-        CircularFortune.musicaJuego.stop();
-        
-        musicaPlay.setOnAction((new EventHandler<ActionEvent>() {
-            @Override
-            
-            public void handle(ActionEvent event) {
-              CircularFortune.musicaInicio.play();
-            }
-        }));
-
-    }
-     */
+   
     @FXML
     void click(ActionEvent event) throws IOException {
         playSound();

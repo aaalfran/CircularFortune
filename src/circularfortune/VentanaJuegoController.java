@@ -72,16 +72,25 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     private Circle blurrIzq;
+    
+    @FXML
+    private Circle blurrSwap;
+    
+     @FXML
+    private Circle blurrEdit;
+     
+     @FXML
+    private Circle blurrUnlock;
 
     //Comodines
     @FXML
-    private Button comodinCambiar;
+    private Button swap;
 
     @FXML
-    private Button comodin2;
+    private Button edit;
 
     @FXML
-    private Button reactivar;
+    private Button unlock;
 
     // reproduce o pausa la musica
     @FXML
@@ -119,6 +128,9 @@ public class VentanaJuegoController implements Initializable {
     void clickElim(ActionEvent event) throws IOException {
         rotIzq.setDisable(true);
         rotDer.setDisable(true);
+        blurrDer.setOpacity(0.5);
+        blurrIzq.setOpacity(0.5);
+        blurrElim.setOpacity(0);
         playSound("eliminar");
 
         TextInputDialog dialogoTextual = new TextInputDialog();
@@ -181,7 +193,7 @@ public class VentanaJuegoController implements Initializable {
                 alerta.showAndWait();
             }
         } catch (Exception ex) {
-            System.out.println("Cerrando el programa....");
+            System.out.println("Ventana de ingreso cerrada");
         }
 
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
@@ -218,15 +230,18 @@ public class VentanaJuegoController implements Initializable {
         //Se establecen las reglas del juego
         if (SettingsController.comodinesActivados) {
 
-            comodinCambiar.setDisable(false);
-            comodin2.setDisable(false);
-            reactivar.setDisable(false);
+            swap.setDisable(false);
+            edit.setDisable(false);
+            unlock.setDisable(false);
 
         } else {
 
-            comodinCambiar.setDisable(true);
-            comodin2.setDisable(true);
-            reactivar.setDisable(true);
+            swap.setDisable(true);
+            blurrSwap.setOpacity(0.5);
+            edit.setDisable(true);
+            blurrEdit.setOpacity(0.5);
+            unlock.setDisable(true);
+            blurrUnlock.setOpacity(0.5);
 
         }
 
@@ -239,7 +254,6 @@ public class VentanaJuegoController implements Initializable {
         Integer tot = DoubleCircularList.suma(vistaJuego.cirExterno, vistaJuego.cirInterno);
         score.setText(tot.toString());
 
-        System.out.println(apuestaIni);
 
     }
 
@@ -286,7 +300,7 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @FXML
-    void reactivarComodines(ActionEvent event) {
+    void clickUnlock(ActionEvent event) {
         eliminar.setDisable(false);
         rotIzq.setDisable(false);
         rotDer.setDisable(false);
@@ -295,7 +309,10 @@ public class VentanaJuegoController implements Initializable {
         blurrElim.setOpacity(0);
         try {
             JuegoTerminado();
-            reactivar.setDisable(true);
+            unlock.setDisable(true);
+            blurrUnlock.setOpacity(0.5);
+            playSound("unlock");
+            
 
         } catch (IOException ex) {
             Logger.getLogger(VentanaJuegoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -303,10 +320,10 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @FXML
-    void change(ActionEvent event) {
+    void clickSwap(ActionEvent event) {
         try {
             TextInputDialog dialogoTextual = new TextInputDialog();
-            dialogoTextual.setTitle("Comodín 1");
+            dialogoTextual.setTitle("Swap");
             dialogoTextual.setHeaderText("Ingrese los índices de los círculos a intercambiar");
             dialogoTextual.setContentText("Ingrese los Indices separados por coma: Círculo Interior,Círculo Exrterior");
             dialogoTextual.initStyle(StageStyle.UTILITY);
@@ -348,7 +365,10 @@ public class VentanaJuegoController implements Initializable {
 
                             DoubleCircularList.changePosition(cirInterno, cirExterno, numI, numE);
                             vistaJuego.actualizarValoresCirculos();
-                            comodinCambiar.setDisable(true);
+                            swap.setDisable(true);
+                            blurrSwap.setOpacity(0.5);
+                            playSound("swap");
+                            
 
                         } else {
                             ventanaWarning();
@@ -368,7 +388,7 @@ public class VentanaJuegoController implements Initializable {
     }
 
     @FXML
-    void cambioElemento(ActionEvent event) {
+    void editCircle(ActionEvent event) {
         try {
             TextInputDialog dialogoTextual = new TextInputDialog();
             dialogoTextual.setTitle("Comodín 2");
@@ -430,7 +450,9 @@ public class VentanaJuegoController implements Initializable {
                             score.setText(tot.toString());
                             JuegoTerminado();
                         }
-                        comodin2.setDisable(true);
+                        edit.setDisable(true);
+                        blurrEdit.setOpacity(0.5);
+                        playSound("edit");
 
                     } else {
                         ventanaWarning();
@@ -461,26 +483,20 @@ public class VentanaJuegoController implements Initializable {
         boolean obtuvoNegativo = false;
         boolean sinCirculos = false;
 
-        System.out.println(circulosInterno.size());
-
         if (score.getText().equals(apuesta.getText())) {
             terminado = true;
             ganador = true;
-            System.out.println("Ganador");
         } else if (circulosInterno.isEmpty()) {
             terminado = true;
             ganador = false;
             sinCirculos = true;
-            System.out.println("Perdedor, sin circulos");
         } else if (buscarNegativos()) {
             obtuvoNegativo = true;
             ganador = false;
             terminado = true;
-            System.out.println("Perdedor, negativos");
         }
 
         if (terminado) {
-            System.out.println("Juego terminado");
             Stage st = (Stage) anchor.getScene().getWindow();
             Alert.AlertType mensajeFinal = Alert.AlertType.INFORMATION;
             Alert alert = new Alert(mensajeFinal, "");
@@ -567,6 +583,20 @@ public class VentanaJuegoController implements Initializable {
             }
             case "eliminar": {
                 AudioClip note = new AudioClip(this.getClass().getResource("/resources/elim.wav").toString());
+                note.play();
+                break;
+            }
+            case "edit":{
+                AudioClip note = new AudioClip(this.getClass().getResource("/resources/edit.mp3").toString());
+                note.play();
+                break;
+            }
+            case "unlock": {
+                AudioClip note = new AudioClip(this.getClass().getResource("/resources/unlock.wav").toString());
+                note.play();
+                break;
+            }case "swap": {
+                AudioClip note = new AudioClip(this.getClass().getResource("/resources/swap.wav").toString());
                 note.play();
                 break;
             }

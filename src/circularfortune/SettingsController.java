@@ -80,7 +80,6 @@ public class SettingsController implements Initializable {
         sliderCirculos.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             Double d = sliderCirculos.getValue();
             cantidadCirculos = d.intValue();
-            System.out.println(cantidadCirculos);
         });
         apuesta.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -91,7 +90,6 @@ public class SettingsController implements Initializable {
                 try{
                     apuestaIni = Integer.parseInt(apuesta.getText());
                 }catch(NumberFormatException e){
-                    System.out.println("Rango no permitido");
                     Stage st = (Stage) anchor.getScene().getWindow();
                     Alert.AlertType tipoAlerta = Alert.AlertType.WARNING;
                     Alert alerta = new Alert(tipoAlerta, "");
@@ -130,14 +128,21 @@ public class SettingsController implements Initializable {
 
     @FXML
     void activarComodines(ActionEvent event) {
-
-        comodinesActivados = true;
+        if(comodines.isSelected()){
+            comodinesActivados = true;
+        }else if(!comodines.isSelected()){
+            comodinesActivados = false;
+        }
 
     }
 
     @FXML
     void noNegativos(ActionEvent event) {
-        sinNegativos = true;
+        if(noNegativos.isSelected()){
+            sinNegativos = true;
+        }else if(!noNegativos.isSelected()){
+            sinNegativos = false;
+        }
     }
 
     private void playSound(String sonido) {
@@ -147,7 +152,7 @@ public class SettingsController implements Initializable {
         } else if (sonido.equals("start")) {
             AudioClip note = new AudioClip(this.getClass().getResource("/resources/start.wav").toString());
             note.play();
-        }
+        } 
     }
 
     private int getRandom() {
