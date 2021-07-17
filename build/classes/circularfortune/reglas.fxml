@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane id="AnchorPane" prefHeight="695.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="circularfortune.ReglasController">
    <children>
@@ -13,7 +16,7 @@
             <Image url="@../resources/casino.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="693.0" fitWidth="759.0" layoutX="293.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="711.0" fitWidth="586.0" layoutX="276.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/reglas.png" />
          </image>
@@ -28,5 +31,81 @@
             <Shadow color="#00000004" />
          </effect>
       </Button>
+      <Label layoutX="444.0" layoutY="131.0" prefHeight="45.0" prefWidth="265.0" text="Operaciones Basicas:" textFill="#b90808">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="334.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/der.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="386.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/izq.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="45.0" layoutX="364.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/elim.png" />
+         </image>
+      </ImageView>
+      <TextFlow layoutX="444.0" layoutY="185.0" prefHeight="91.0" prefWidth="334.0">
+         <children>
+            <Label text="Rotaciones: Permiten al jugador rotar los circulos " />
+            <Label text="del circulo interno y el circulo externo, a estos se" />
+            <Label prefHeight="21.0" prefWidth="336.0" text="les sumara 1, en caso de ser a la derecha y  se les " />
+            <Label text="restara 1 en caso de ser hacia la izquierda" />
+         </children>
+      </TextFlow>
+      <TextFlow layoutX="433.0" layoutY="276.0" prefHeight="65.0" prefWidth="334.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="336.0" text="Eliminaciones: Borra los 2 elementos, en un indice" />
+            <Label prefHeight="21.0" prefWidth="331.0" text="dado, esta eliminacion se dara en el indice tanto" />
+            <Label prefHeight="21.0" prefWidth="324.0" text="para el circulo interno como para el externo." />
+         </children>
+      </TextFlow>
+      <Label layoutX="343.0" layoutY="333.0" prefHeight="45.0" prefWidth="427.0" text="Operaciones Avanzadas(comodines):" textFill="#d31111">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="343.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/swap.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="343.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/edit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="343.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/unlock.png" />
+         </image>
+      </ImageView>
+      <TextFlow layoutX="388.0" layoutY="378.0" prefHeight="45.0" prefWidth="387.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="381.0" text="Swap: Te permite cambiar un elmento del circulo interno" />
+            <Label prefHeight="21.0" prefWidth="393.0" text="con el externo, dados ambos indices separados con coma" />
+         </children>
+      </TextFlow>
+      <TextFlow layoutX="388.0" layoutY="423.0" prefHeight="97.0" prefWidth="381.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="381.0" text="Edit: Te permite editar un valor con uno que desees, para" />
+            <Label prefHeight="21.0" prefWidth="380.0" text="esto debes pasar 0 o 1 para identificar el circulo interno " />
+            <Label prefHeight="21.0" prefWidth="375.0" text="con el externo respectivamente, el indice del circulo y el" />
+            <Label prefHeight="21.0" prefWidth="400.0" text="valor que deseas ingresar, todos los parametros separados" />
+            <Label text="con comas" />
+         </children>
+      </TextFlow>
+      <TextFlow layoutX="388.0" layoutY="528.0" prefHeight="35.0" prefWidth="387.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="381.0" text="Te permite desbloquear la operacion basica que llegues" />
+            <Label text="a necesitar" />
+         </children>
+      </TextFlow>
    </children>
 </AnchorPane>
