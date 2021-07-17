@@ -32,6 +32,7 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -62,6 +63,15 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     private Button musicaPlay;
+    
+     @FXML
+    private Circle blurrDer;
+     
+     @FXML
+    private Circle blurrElim;
+
+    @FXML
+    private Circle blurrIzq;
 
     //Comodines
     @FXML
@@ -89,6 +99,9 @@ public class VentanaJuegoController implements Initializable {
         rotIzq.setDisable(true);
         rotDer.setDisable(true);
         eliminar.setDisable(false);
+        blurrDer.setOpacity(0.5);
+        blurrIzq.setOpacity(0.5);
+        blurrElim.setOpacity(0);
 
         playSound("derecha");
 
@@ -121,6 +134,9 @@ public class VentanaJuegoController implements Initializable {
                     eliminar.setDisable(true);
                     rotIzq.setDisable(false);
                     rotDer.setDisable(false);
+                    blurrDer.setOpacity(0);
+                    blurrIzq.setOpacity(0);
+                    blurrElim.setOpacity(0.5);
                     //Eliminar Círculos  
                     for (int i = 0; i < circulosInterno.size(); i++) {
                         Node eliminarCInterno = circulosInterno.get(i);
@@ -176,9 +192,11 @@ public class VentanaJuegoController implements Initializable {
     @FXML
     void clickIzq(ActionEvent event) throws IOException {
         rotIzq.setDisable(true);
-        rotIzq.setBlendMode(BlendMode.BLUE);
         rotDer.setDisable(true);
         eliminar.setDisable(false);
+        blurrDer.setOpacity(0.5);
+        blurrIzq.setOpacity(0.5);
+        blurrElim.setOpacity(0);
         playSound("izquierda");
         DoubleCircularList.moveLeft(cirExterno);
         DoubleCircularList.moveLeft(cirInterno);
