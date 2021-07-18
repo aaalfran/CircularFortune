@@ -17,3 +17,6 @@ Figura 3: Cuando se le clic al botón Play (Figura 1) se abre una ventana de aju
 
 Figura 4: Cuando se da clic al botón play (Figura 3) se abre el juego y comenzamos a jugar en la parte inferior izquierda están los botones de los tres comodines, en el centro los movimientos de izquierda, derecha y eliminar círculos, en la derecha el valor de la apuesta inicial (puesta en la Figura 3) y el score que la suma de todos los círculos y está se va a ir actualizando según la acción que tome el usuario, ya sea una eliminación o una rotación. 
 Tenemos en la parte superior derecha el botón regresar al menú principal y el botón silenciar música. 
+
+# Clase Principal
+![clasePrincipal](https://user-images.githubusercontent.com/73259474/126052251-37bb1c1e-9d86-41c1-90a2-74d19c8b9cd3.png)
